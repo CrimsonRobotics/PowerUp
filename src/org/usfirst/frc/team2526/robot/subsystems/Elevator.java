@@ -17,7 +17,7 @@ public class Elevator extends Subsystem {
 	WPI_TalonSRX Elevator2;
 	public Elevator(int el1, int el2) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
-	    	Elevator1 = new WPI_TalonSRX(el2);
+	    	Elevator2 = new WPI_TalonSRX(el2);
 	    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -27,8 +27,8 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void moveElevator(Joystick costick) {
-    	Elevator1.set(costick.getY());
-    	Elevator2.set(costick.getY());
+    	Elevator1.set(-costick.getY());
+    	Elevator2.set(-costick.getY());
     }
 }
 

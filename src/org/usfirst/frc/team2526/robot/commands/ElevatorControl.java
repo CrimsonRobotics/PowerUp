@@ -2,13 +2,16 @@ package org.usfirst.frc.team2526.robot.commands;
 
 import org.usfirst.frc.team2526.robot.Robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ElevatorControl extends Command {
-
+	WPI_TalonSRX Elevator1;
+	WPI_TalonSRX Elevator2;
     public ElevatorControl() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.elevator);
@@ -17,8 +20,7 @@ public class ElevatorControl extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator1 = new WPI_TalonSRX(3);
-    	Elevator1 = new WPI_TalonSRX(6);
+    	
     	//limit switches
     }
 
