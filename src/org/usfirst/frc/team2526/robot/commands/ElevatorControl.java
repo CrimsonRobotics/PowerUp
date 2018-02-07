@@ -11,17 +11,23 @@ public class ElevatorControl extends Command {
 
     public ElevatorControl() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.elvevator);
+        requires(Robot.elevator);
    
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Elevator1 = new WPI_TalonSRX(3);
+    	Elevator1 = new WPI_TalonSRX(6);
+    	//limit switches
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elvevator.moveElevator(Robot.m_oi.getCoDriver());
+    	Robot.elevator.moveElevator(Robot.m_oi.getCoDriver());
+    	
+    	
+    	//limit switches
     }
 
     // Make this return true when this Command no longer needs to run execute()
