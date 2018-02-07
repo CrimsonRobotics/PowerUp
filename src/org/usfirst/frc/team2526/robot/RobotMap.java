@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import com.crimsonrobotics.lib.PID;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -14,6 +16,17 @@ package org.usfirst.frc.team2526.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	
+	
+	
+	public static final int DRIVETRAIN_FRONTLEFT = 1;
+	public static final int DRIVETRAIN_FRONTRIGHT = 2;
+	public static final int DRIVETRAIN_BACKLEFT = 3;
+	public static final int DRIVETRAIN_BACKRIGHT = 4;
+	public static final PID DRIVETRAIN_GAINS_LEFT = new PID(1, 0, 0, .7, 0, 0, 0);
+	public static final PID DRIVETRAIN_GAINS_RIGHT = new PID(0, 0, 0, .8, 0, 0, 0);
+	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
