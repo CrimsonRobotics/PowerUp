@@ -20,10 +20,10 @@ public class RobotMap {
 	
 	
 	
-	public static final int DRIVETRAIN_FRONTLEFT = 1;
-	public static final int DRIVETRAIN_FRONTRIGHT = 2;
-	public static final int DRIVETRAIN_BACKLEFT = 3;
-	public static final int DRIVETRAIN_BACKRIGHT = 4;
+	public static final int DRIVETRAIN_FRONTLEFT = 2;
+	public static final int DRIVETRAIN_FRONTRIGHT = 7;
+	public static final int DRIVETRAIN_BACKLEFT = 1;
+	public static final int DRIVETRAIN_BACKRIGHT = 8;
 	public static final PID DRIVETRAIN_GAINS_LEFT = new PID(1, 0, 0, .7, 0, 0, 0);
 	public static final PID DRIVETRAIN_GAINS_RIGHT = new PID(0, 0, 0, .8, 0, 0, 0);
 	
