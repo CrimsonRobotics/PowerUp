@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
 
-   
 	WPI_TalonSRX Elevator1;
 	WPI_TalonSRX Elevator2;
+	//DigitalInput limitSwitch;
 	public Elevator(int el1, int el2) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
 	    	Elevator2 = new WPI_TalonSRX(el2);
