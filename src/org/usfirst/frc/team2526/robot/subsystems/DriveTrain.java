@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
+import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.commands.TeleopDrive;
 
 import com.ctre.CANTalon;
@@ -47,14 +48,17 @@ public class DriveTrain extends Subsystem {
 			drive = new DifferentialDrive(this.left , this.right);
 			frontleft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 			frontright.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
-			SmartDashboard.putNumber("speedR", frontright.getSelectedSensorVelocity(0));
-			SmartDashboard.putNumber("speedL", frontleft.getSelectedSensorVelocity(0));
+		//	SmartDashboard.putNumber("speedR", frontright.getSelectedSensorVelocity(0));
+	//		SmartDashboard.putNumber("speedL", frontleft.getSelectedSensorVelocity(0));		
 			//teleopDriveInit();
 			
 		}
-		public void getSpeed(){
-	    	SmartDashboard.putNumber("speedR", frontright.getSelectedSensorVelocity(0));
-			SmartDashboard.putNumber("speedL", frontleft.getSelectedSensorVelocity(0));
+		public int getRightSpeed(){
+			return frontright.getSelectedSensorVelocity(0);
+			
+		}
+		public int getLeftSpeed(){
+			return frontleft.getSelectedSensorVelocity(0);
 		}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -66,8 +70,8 @@ public class DriveTrain extends Subsystem {
    
     	frontleft.setInverted(true);
     	backleft.setInverted(true);
-    	frontright.setInverted(false);
-    	backleft.setInverted(false);
+    	frontright.setInverted(true);
+    	backleft.setInverted(true);
     	
     }
     
