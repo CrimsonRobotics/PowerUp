@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
 	
 	
 	
-	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT, RobotMap.DRIVETRAIN_BACKRIGHT, RobotMap.DRIVETRAIN_FRONTLEFT, RobotMap.DRIVETRAIN_FRONTRIGHT);	
+	public static final DriveTrain drivetrain = new DriveTrain();	
 	
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();

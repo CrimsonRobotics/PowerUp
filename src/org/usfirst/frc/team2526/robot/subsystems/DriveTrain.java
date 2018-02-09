@@ -27,20 +27,20 @@ public class DriveTrain extends Subsystem {
 	WPI_TalonSRX backright;
 	
 	DifferentialDrive drive;
+	SpeedControllerGroup left;
+	SpeedControllerGroup right;
 	
-	SpeedControllerGroup left = new SpeedControllerGroup(frontleft, backleft);
-	SpeedControllerGroup right = new SpeedControllerGroup(frontright, backright);
-	
-		public DriveTrain(int drivetrainBackleft, int drivetrainBackright, int drivetrainFrontleft, int drivetrainFrontright){
+		public DriveTrain(){
 			
-			frontleft = new WPI_TalonSRX(1);
-			backleft = new WPI_TalonSRX(3);
-			frontright = new WPI_TalonSRX(2);
-			backright = new WPI_TalonSRX(4);
+			frontleft = new WPI_TalonSRX(2);
+			backleft = new WPI_TalonSRX(1);
+			frontright = new WPI_TalonSRX(7);
+			backright = new WPI_TalonSRX(8);
 			
 			backleft.follow(frontleft);
 			backright.follow(frontright);
-		
+			left = new SpeedControllerGroup(frontleft, backleft);
+			right = new SpeedControllerGroup(frontright, backright);
 			drive = new DifferentialDrive(this.left , this.right);
 			teleopDriveInit();
 			
@@ -53,10 +53,10 @@ public class DriveTrain extends Subsystem {
     
     public void teleopDriveInit(){
     	
-    	frontleft.setInverted(true);
-    	backleft.setInverted(true);
-    	frontright.setInverted(true);
-    	backleft.setInverted(true);
+    	frontleft.setInverted(false);
+    	backleft.setInverted(false);
+    	frontright.setInverted(false);
+    	backleft.setInverted(false);
     	
     }
     
@@ -64,7 +64,7 @@ public class DriveTrain extends Subsystem {
 	
 	
     public void teleopCraneDrive(Joystick left, Joystick right){
-		drive.arcadeDrive(left.getY(), right.getX(), true);
+		drive.arcadeDrive(left.getY(), -right.getX(), true);
 }
     
 }
