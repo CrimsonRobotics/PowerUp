@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2526.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2526.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,8 +28,7 @@ public class Robot extends TimedRobot {
 	
 	
 	
-	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT, RobotMap.DRIVETRAIN_BACKRIGHT, RobotMap.DRIVETRAIN_FRONTLEFT, RobotMap.DRIVETRAIN_FRONTRIGHT);	
-	
+	public static final Intake intake = new Intake(4,5);
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
 	public static OI m_oi;

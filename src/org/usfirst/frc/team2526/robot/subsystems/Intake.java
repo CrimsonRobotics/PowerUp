@@ -19,6 +19,18 @@ public class Intake extends Subsystem {
 	// here. Call these from Commands.
 	WPI_TalonSRX talon1;
 	WPI_TalonSRX talon2;
+	public Intake(int id1,int id2) {
+		talon1 = new WPI_TalonSRX(id1);
+		talon2 = new WPI_TalonSRX(id2);
+	}
+	public void intakeIn() {
+		talon1.set(1);
+		talon2.set(1);
+	}
+	public void intakeOut() {
+		talon1.set(-1);
+		talon2.set(-1);
+	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
