@@ -16,11 +16,9 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	private Joystick coDriver = new Joystick(2);
 	public Joystick getCoDriver(){
-		Button button = newJoystickButton(stick, buttonNumber);
 		return coDriver;
 		
-		button.whenPressed(new ExampleCommand(
-				));
+
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
