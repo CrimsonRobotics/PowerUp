@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team2526.robot;
 
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -17,10 +17,8 @@ package org.usfirst.frc.team2526.robot;
  */
 public class RobotMap {
 	
-	
-	public static final int ELEVATOR_TALON1 = 4;
-	public static final int ELEVATOR_TALON2 = 5;
-	
+	public static int INTAKERIGHT = 4;
+	public static int INTAKELEFT = 5;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
