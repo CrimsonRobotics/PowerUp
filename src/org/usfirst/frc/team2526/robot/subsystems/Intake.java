@@ -20,16 +20,16 @@ public class Intake extends Subsystem {
 	WPI_TalonSRX talon1;
 	WPI_TalonSRX talon2;
 	public Intake(int id1,int id2) {
-		talon1 = new WPI_TalonSRX(3);
+		talon1 = new WPI_TalonSRX(4);
 		talon2 = new WPI_TalonSRX(5);
 	//	talon2.follow(talon1);
 	}
 	public void intakeLeftIn() {
-		talon1.set(-1);
+		talon1.set(1);
 		talon2.set(-1);
 	}
 	public void intakeOut() {
-		talon1.set(1);
+		talon1.set(-1);
 		talon2.set(1);
 	}
 	public void initDefaultCommand() {
