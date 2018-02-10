@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team2526.robot;
 
-import com.crimsonrobotics.lib.PID;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -27,6 +27,8 @@ public class RobotMap {
 	public static final PID DRIVETRAIN_GAINS_LEFT = new PID(1, 0, 0, .7, 0, 0, 0);
 	public static final PID DRIVETRAIN_GAINS_RIGHT = new PID(0, 0, 0, .8, 0, 0, 0);
 	
+	public static int INTAKERIGHT = 4;
+	public static int INTAKELEFT = 5;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
