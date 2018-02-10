@@ -7,11 +7,18 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team2526.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2526.robot.subsystems.Intake;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
 /**
@@ -24,9 +31,18 @@ import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 public class Robot extends TimedRobot {
 	
 	public static final Elevator elevator = new Elevator(3,6);
-	public static OI m_oi;
+	
+	
+	
+	
+	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
+	
 
-	Command m_autonomousCommand;
+	public static final Intake intake = new Intake(RobotMap.INTAKELEFT,RobotMap.INTAKERIGHT);
+	public static final ExampleSubsystem kExampleSubsystem
+			= new ExampleSubsystem();
+	public static OI m_oi;
+		Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -98,10 +114,14 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
 	}
+
 
 	/**
 	 * This function is called periodically during operator control.
@@ -109,6 +129,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		
 	}
 
 	/**

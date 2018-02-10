@@ -9,6 +9,12 @@ package org.usfirst.frc.team2526.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team2526.robot.commands.GearIn;
+import org.usfirst.frc.team2526.robot.commands.IntakeOut;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -20,6 +26,21 @@ public class OI {
 		
 
 	}
+	private Joystick coDriver = new Joystick(2);
+	private JoystickButton gearIn = new JoystickButton(coDriver,1);
+	private JoystickButton gearOut = new JoystickButton(coDriver,4);
+	public OI() {
+		gearIn.whileHeld(new GearIn());
+		gearOut.whileHeld(new IntakeOut());
+	}
+	
+	public Joystick getCoDriver(){
+		return coDriver;
+	}
+
+	
+	
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
