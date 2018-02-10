@@ -17,6 +17,16 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class RobotMap {
 	
+	
+	
+	
+	public static final int DRIVETRAIN_FRONTLEFT = 2;
+	public static final int DRIVETRAIN_FRONTRIGHT = 7;
+	public static final int DRIVETRAIN_BACKLEFT = 1;
+	public static final int DRIVETRAIN_BACKRIGHT = 8;
+	public static final PID DRIVETRAIN_GAINS_LEFT = new PID(1, 0, 0, .7, 0, 0, 0);
+	public static final PID DRIVETRAIN_GAINS_RIGHT = new PID(0, 0, 0, .8, 0, 0, 0);
+	
 	public static int INTAKERIGHT = 4;
 	public static int INTAKELEFT = 5;
 	// For example to map the left and right motors, you could define the

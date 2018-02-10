@@ -30,6 +30,10 @@ import org.usfirst.frc.team2526.robot.subsystems.Intake;
 public class Robot extends TimedRobot {
 	
 	
+	
+	
+	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
+	
 
 	public static final Intake intake = new Intake(RobotMap.INTAKELEFT,RobotMap.INTAKERIGHT);
 	public static final ExampleSubsystem kExampleSubsystem
@@ -107,10 +111,14 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
 	}
+
 
 	/**
 	 * This function is called periodically during operator control.
@@ -118,6 +126,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		
 	}
 
 	/**
