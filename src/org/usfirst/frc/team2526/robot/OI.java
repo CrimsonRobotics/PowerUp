@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
 
@@ -18,6 +20,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	private Joystick coDriver = new Joystick(2);
+	public Joystick getCoDriver(){
+		return coDriver;
+		
+
+	}
 	private Joystick coDriver = new Joystick(2);
 	private JoystickButton gearIn = new JoystickButton(coDriver,1);
 	private JoystickButton gearOut = new JoystickButton(coDriver,4);
@@ -60,4 +68,7 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	
+	
 }
