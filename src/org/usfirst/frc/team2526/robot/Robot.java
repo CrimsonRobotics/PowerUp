@@ -30,13 +30,7 @@ import org.usfirst.frc.team2526.robot.subsystems.Intake;
 public class Robot extends TimedRobot {
 	
 	
-	DigitalInput RGB0 = new DigitalInput(0);
-	DigitalInput RGB1;
-	DigitalInput RGB2;
-	I2C i2c0;
-	I2C i2c1;
-	I2C i2c2;
-	Byte[] toSend = new Byte[2];
+
 	public static final Intake intake = new Intake(RobotMap.INTAKELEFT,RobotMap.INTAKERIGHT);
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
