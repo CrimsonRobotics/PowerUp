@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,8 +21,8 @@ public class Elevator extends Subsystem {
 	public Elevator(int el1, int el2, int lmB, int lmT) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
 	    	Elevator2 = new WPI_TalonSRX(el2);
-	    	topElevator = new DigitalInput(lmT);
-	    	bottomElevator = new DigitalInput(lmB);
+	    	topElevator = new DigitalInput(0);
+	    	bottomElevator = new DigitalInput(1);
 	    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -31,7 +32,7 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void moveElevator(Joystick costick) {
-    	if(!topElevator.get() || !bottomElevator.get()) {
+   	if(!topElevator.get() || !bottomElevator.get()) {
     		Elevator1.set(-costick.getY());
         	Elevator2.set(-costick.getY());
     	}else {
@@ -39,9 +40,7 @@ public class Elevator extends Subsystem {
         	Elevator2.set(0);
     	}
     	
-    		
-    	}
     	}	
+}
     	
-
 

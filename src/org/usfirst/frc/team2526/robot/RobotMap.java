@@ -26,7 +26,7 @@ public class RobotMap {
 	public static final int INTAKE_RIGHT = 4;
 	public static final int INTAKE_LEFT = 5;
 	public static final int LIMIT_ELEVATOR_B =0;
-	public static final int LIMIT_ELEVATOR_T =0;
+	public static final int LIMIT_ELEVATOR_T =1;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
