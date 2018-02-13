@@ -67,11 +67,11 @@ public class DriveTrain extends Subsystem {
     
     public void teleopDriveInit(){
    
-    	frontleft.setInverted(true);
+    	/*frontleft.setInverted(true);
     	backleft.setInverted(true);
     	frontright.setInverted(true);
     	backleft.setInverted(true);
-    	
+    	*/
     }
     
   
