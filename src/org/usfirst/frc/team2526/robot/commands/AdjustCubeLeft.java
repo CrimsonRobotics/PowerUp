@@ -7,16 +7,14 @@
 
 package org.usfirst.frc.team2526.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2526.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class TimedTakeIn extends Command {
-	private Boolean isDone = false;
-	public TimedTakeIn() {
+public class AdjustCubeLeft extends Command {
+	public AdjustCubeLeft() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.intake);
 	}
@@ -29,16 +27,13 @@ public class TimedTakeIn extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.intake.intakeIn();
-		Timer.delay(.2);
-		Robot.intake.intakeStop();
-		isDone = true;
+		Robot.intake.adjustCubeLeft();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return isDone;
+		return true;
 	}
 
 	// Called once after isFinished returns true

@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	WPI_TalonSRX talon1;
-	WPI_TalonSRX talon2;
+	WPI_TalonSRX talon1;//Left
+	WPI_TalonSRX talon2;//Right
 	public Intake(int id1,int id2) {
 		talon1 = new WPI_TalonSRX(4);
 		talon2 = new WPI_TalonSRX(5);
@@ -36,9 +36,21 @@ public class Intake extends Subsystem {
 		talon1.set(-1);
 		talon2.set(1);
 	}
+	public void intakeAdjustOut() {
+		talon1.set(.9);
+		talon2.set(.9);
+	}
 	public void adjustCube() {
-		talon1.set(.5);
-		talon2.set(.5);
+		talon1.set(-1);
+		talon2.set(-1);
+	}
+	public void adjustCubeRight() {
+		talon1.set(-1);
+		talon2.set(-.8);
+	}
+	public void adjustCubeLeft() {
+		talon1.set(1);
+		talon2.set(.8);
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

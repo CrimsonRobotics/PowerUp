@@ -19,12 +19,12 @@ public class Elevator extends Subsystem {
 	DigitalInput topElevator;
 	DigitalInput bottomElevator;
 	DigitalInput nnewl;
+	double antiGrav = .2;
 	public Elevator(int el1, int el2, int lmB, int lmT) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
 	    	Elevator2 = new WPI_TalonSRX(el2);
-	   	topElevator = new DigitalInput(1);
-	   	bottomElevator = new DigitalInput(0);
-		nnewl = new DigitalInput(2);
+	   	topElevator = new DigitalInput(0);
+	   	bottomElevator = new DigitalInput(1);
 	    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -48,16 +48,21 @@ public class Elevator extends Subsystem {
     			}
     		}else if(!bottomElevator.get()) {
     			if(-coStick.getY() < 0) {
-    				Elevator1.set(0);
-    				Elevator2.set(0);
+    				Elevator1.set(antiGrav);
+    				Elevator2.set(antiGrav);
     			}else {
     				Elevator1.set(-coStick.getY());
     	        	Elevator2.set(-coStick.getY());
     			}
     		}
     	}
-
-   
+    	
+    	if (bottomElevator.get()) {
+			if (Elevator1.get() > -.05 && Elevator1.get() < .05){
+				Elevator1.set(antiGrav);
+				Elevator2.set(antiGrav);
+			}
+    	}
     	}	
    public boolean gettopLimit() {
     	return topElevator.get();
