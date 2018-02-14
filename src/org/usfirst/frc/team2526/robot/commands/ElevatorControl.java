@@ -5,6 +5,7 @@ import org.usfirst.frc.team2526.robot.Robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //import edu.wpi.first.wpilibj.DigitalInput; 
 
@@ -32,7 +33,8 @@ public class ElevatorControl extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.elevator.moveElevator(Robot.m_oi.getCoDriver());
-    	
+    	SmartDashboard.putBoolean("HEHEHEHE", Robot.elevator.getbottomLimit());
+    	SmartDashboard.putBoolean("HEHEdjskfhsHEHE", Robot.elevator.gettopLimit());
     	//while (limitSwitch.get()) {
     		//Timer.delay(10);
     	}

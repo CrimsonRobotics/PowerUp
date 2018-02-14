@@ -9,6 +9,7 @@ package org.usfirst.frc.team2526.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
 import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.GearStop;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
@@ -31,6 +32,7 @@ public class OI {
 		gearIn.whenReleased(new GearStop());
 		gearOut.whileHeld(new IntakeOut());
 		gearOut.whenReleased(new GearStop());
+		
 	}
 	
 	public Joystick getCoDriver(){

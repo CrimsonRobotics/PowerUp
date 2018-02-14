@@ -25,8 +25,8 @@ public class Intake extends Subsystem {
 	//	talon2.follow(talon1);
 	}
 	public void intakeLeftIn() {
-		talon1.set(.5);
-		talon2.set(-.5);
+		talon1.set(.7);
+		talon2.set(-.7);
 	}
 	public void intakeStop() {
 		talon1.set(0);

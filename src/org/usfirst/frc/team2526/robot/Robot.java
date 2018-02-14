@@ -32,11 +32,11 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator(RobotMap.ELEVATOR_RIGHT,RobotMap.ELEVATOR_LEFT,RobotMap.LIMIT_ELEVATOR_B,RobotMap.LIMIT_ELEVATOR_T);
 	
 	
-	
-	
 	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
-	
-
+	/*
+	DigitalInput input; 
+	DigitalInput input1;
+	DigitalInput input2;*/
 	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 	
 	public static OI m_oi;
@@ -50,7 +50,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		
+		/*input = new DigitalInput(0);
+		input1 = new DigitalInput(1);
+		input2 = new DigitalInput(2);*/
+
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
@@ -108,6 +111,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -126,6 +130,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		/*SmartDashboard.putBoolean("Hoo", !input.get());
+		 SmartDashboard.putBoolean("Haa", !input1.get());
+		 SmartDashboard.putBoolean("Hee", !input2.get());*/
 		Scheduler.getInstance().run();
 		
 		
