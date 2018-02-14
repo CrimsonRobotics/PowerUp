@@ -33,30 +33,28 @@ public class Elevator extends Subsystem {
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public void moveElevator(Joystick costick) {
-    	if(topElevator.get() || bottomElevator.get()) {
-    		Elevator1.set(-costick.getY());
-        	Elevator2.set(-costick.getY());
-    	}else if (!topElevator.get() && !bottomElevator.get()){
-    			if(-costick.getY() > 0) {
+    public void moveElevator(Joystick coStick) {
+    	if(topElevator.get() && bottomElevator.get()) {
+    		Elevator1.set(-coStick.getY());
+        	Elevator2.set(-coStick.getY());
+    	}else{
+    		if(!topElevator.get()) {
+    			if(-coStick.getY() > 0) {
     				Elevator1.set(0);
-    	        	Elevator2.set(0);
+    				Elevator2.set(0);
+    			}else {
+    				Elevator1.set(-coStick.getY());
+    	        	Elevator2.set(-coStick.getY());
     			}
-    			else {
-    				Elevator1.set(-costick.getY());
-    	        	Elevator2.set(-costick.getY());
+    		}else if(!bottomElevator.get()) {
+    			if(-coStick.getY() < 0) {
+    				Elevator1.set(0);
+    				Elevator2.set(0);
+    			}else {
+    				Elevator1.set(-coStick.getY());
+    	        	Elevator2.set(-coStick.getY());
     			}
-    		
-    	}else if (bottomElevator.get()){
-    		if(-costick.getY() < 0) {
-    			Elevator1.set(0);
-	        	Elevator2.set(0);
-    		}else {
-				Elevator1.set(-costick.getY());
-	        	Elevator2.set(-costick.getY());
     		}
-    		
-    	
     	}
 
    
