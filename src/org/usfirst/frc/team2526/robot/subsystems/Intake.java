@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
 		talon2 = new WPI_TalonSRX(5);
 	//	talon2.follow(talon1);
 	}
-	public void intakeLeftIn() {
+	public void intakeIn() {
 		talon1.set(.7);
 		talon2.set(-.7);
 	}
@@ -35,6 +35,10 @@ public class Intake extends Subsystem {
 	public void intakeOut() {
 		talon1.set(-1);
 		talon2.set(1);
+	}
+	public void adjustCube() {
+		talon1.set(.5);
+		talon2.set(.5);
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

@@ -14,8 +14,9 @@ import org.usfirst.frc.team2526.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class GearIn extends Command {
-	public GearIn() {
+public class TimedShootOut extends Command {
+	private Boolean isDone = false;
+	public TimedShootOut() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.intake);
 	}
@@ -28,13 +29,16 @@ public class GearIn extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.intake.intakeIn();
+		Robot.intake.intakeOut();
+		Timer.delay(.2);
+		Robot.intake.intakeStop();
+		isDone = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return isDone;
 	}
 
 	// Called once after isFinished returns true

@@ -9,10 +9,12 @@ package org.usfirst.frc.team2526.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team2526.robot.commands.AdjustCube;
 import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
 import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.GearStop;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
+import org.usfirst.frc.team2526.robot.commands.ShootCubeAdjust;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -27,12 +29,16 @@ public class OI {
 	private Joystick coDriver = new Joystick(2);
 	private JoystickButton gearIn = new JoystickButton(coDriver,1);
 	private JoystickButton gearOut = new JoystickButton(coDriver,4);
+	private JoystickButton adjustCube = new JoystickButton(coDriver,6);
+	private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
 	public OI() {
 		gearIn.whileHeld(new GearIn());
 		gearIn.whenReleased(new GearStop());
 		gearOut.whileHeld(new IntakeOut());
 		gearOut.whenReleased(new GearStop());
-		
+		adjustCube.whileHeld(new AdjustCube());
+		adjustCube.whenReleased(new GearStop());
+		adjustCube2.whenPressed(new ShootCubeAdjust());
 	}
 	
 	public Joystick getCoDriver(){
