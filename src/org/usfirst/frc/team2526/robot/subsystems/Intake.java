@@ -49,8 +49,8 @@ public class Intake extends Subsystem {
 		talon2.set(-.8);
 	}
 	public void adjustCubeLeft() {
-		talon1.set(1);
-		talon2.set(.8);
+		talon1.set(.8);
+		talon2.set(1);
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

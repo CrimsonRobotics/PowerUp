@@ -11,14 +11,17 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import org.usfirst.frc.team2526.robot.commands.AdjustCubeLeft;
 import org.usfirst.frc.team2526.robot.commands.AdjustCubeRight;
+import org.usfirst.frc.team2526.robot.commands.ElevatorButton;
 import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
 import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.GearStop;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
 import org.usfirst.frc.team2526.robot.commands.ShootCubeAdjust;
+import org.usfirst.frc.team2526.robot.commands.StopElevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,9 +33,12 @@ public class OI {
 	private Joystick coDriver = new Joystick(2);
 	private JoystickButton gearIn = new JoystickButton(coDriver,1);
 	private JoystickButton gearOut = new JoystickButton(coDriver,4);
-	private JoystickButton adjustCubeLeft = new JoystickButton(coDriver,6);
+	private JoystickButton adjustCubeLeft = new JoystickButton(coDriver,5);
 	private JoystickButton adjustCubeRight = new JoystickButton(coDriver,6);
-	private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
+	private JoystickButton moveElevatorTop = new JoystickButton(coDriver,2);
+	private JoystickButton stopElevator = new JoystickButton(coDriver,7);
+	//private JoystickPOV elevatorUp = new JoystickButton(coDriver,6);
+	//private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
 	public OI() {
 		gearIn.whileHeld(new GearIn());
 		gearIn.whenReleased(new GearStop());
@@ -42,7 +48,9 @@ public class OI {
 		adjustCubeLeft.whenReleased(new GearStop());
 		adjustCubeRight.whileHeld(new AdjustCubeRight());
 		adjustCubeRight.whenReleased(new GearStop());
-		adjustCube2.whenPressed(new ShootCubeAdjust());
+		moveElevatorTop.whenPressed(new ElevatorButton());
+		stopElevator.whenPressed(new StopElevator());
+		//adjustCube2.whenPressed(new ShootCubeAdjust());
 	}
 	
 	public Joystick getCoDriver(){

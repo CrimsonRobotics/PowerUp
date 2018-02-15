@@ -73,6 +73,19 @@ public class Elevator extends Subsystem {
    public boolean getnewLimit() {
 	   	return nnewl.get();
 	   }
+   public void moveTopElevator() {
+	   if(!topElevator.get()) {
+		  Elevator1.set(0);
+		  Elevator2.set(0);
+	   }else {	
+		Elevator1.set(1);
+       	Elevator2.set(1);
+	   }
+   }
+   public void stopElevator() {
+	   Elevator1.set(0);
+	   Elevator2.set(0);
+   }
 }
     	
 
