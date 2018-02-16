@@ -20,10 +20,12 @@ public class Pneumatics extends Subsystem {
 	private DoubleSolenoid elevatorShift;
 	private Solenoid driveShift;
 	private Solenoid carriageDrop;
-	public boolean liftIntake = true;
+	public boolean liftIntake;
+	public boolean elevatorButton;
 	public boolean shiftElevator;
 	public boolean shiftDrive;
 	public boolean dropCarriage;
+	public boolean carriageLimit = true;
 	
 	public Pneumatics(int intakeLiftChannel1,int intakeLiftChannel2, int elevatorShiftChannel1,int elevatorShiftChannel2, int driveShiftChannel, int dropCarriageChannel) {
 		intakeLift  = new DoubleSolenoid(intakeLiftChannel1,intakeLiftChannel2);
@@ -52,6 +54,12 @@ public class Pneumatics extends Subsystem {
     }
     
     //Elevator Pneumatics
+    public void setElevator(boolean elevatorBool) {
+    	elevatorButton = elevatorBool;
+    }
+    public boolean getElevatorBool() {
+    	return elevatorButton;
+    }
     public void elevatorShiftUp() {
     	shiftElevator = true;
     	elevatorShift.set(DoubleSolenoid.Value.kForward);
@@ -64,21 +72,25 @@ public class Pneumatics extends Subsystem {
     //DriveTrain Pneumatics
     public void driveShiftUp() {
     	shiftDrive = false;
-    	driveShift.set(shiftDrive);
+    	driveShift.set(false);
     }
     public void driveShiftDown() {
     	shiftDrive = true;
-    	driveShift.set(shiftDrive);
+    	driveShift.set(true);
     }
     
     //Carriage Pneumatics
     public void carriageDrop() {
     	dropCarriage = true;
+    	carriageLimit = false;
     	carriageDrop.set(dropCarriage);
     }
     public void carriageclose() {
     	dropCarriage = false;
     	carriageDrop.set(dropCarriage);
+    }
+    public boolean getCarriageBool() {
+    	return carriageLimit;
     }
     
 

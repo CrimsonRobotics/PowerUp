@@ -60,7 +60,7 @@ public class OI {
 		adjustCubeRight.whileHeld(new AdjustCubeRight());
 		adjustCubeRight.whenReleased(new GearStop());
 		dropCarriage.whenPressed(new DropCarriage());
-		elevatorShift.whileHeld(new ShiftElevator());
+		elevatorShift.whenPressed(new ShiftElevator());
 		elevatorClose.whenPressed(new CarriageClose());
 		intakeControl.whenPressed(new UpIntake());
 		}

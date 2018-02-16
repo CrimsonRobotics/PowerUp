@@ -23,7 +23,14 @@ public class ShiftElevator extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.pneumatics.elevatorShiftUp();
+		if(Robot.pneumatics.getElevatorBool()) {
+			Robot.pneumatics.elevatorShiftUp();
+			Robot.pneumatics.setElevator(false);
+		}else {
+			Robot.pneumatics.elevatorShiftDown();
+			Robot.pneumatics.setElevator(true);
+		}
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -40,13 +47,12 @@ public class ShiftElevator extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.pneumatics.elevatorShiftDown();
+		
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		Robot.pneumatics.elevatorShiftDown();
 	}
 }

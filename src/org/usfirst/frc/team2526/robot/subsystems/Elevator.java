@@ -1,7 +1,9 @@
 package org.usfirst.frc.team2526.robot.subsystems;
 
+import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -19,12 +21,16 @@ public class Elevator extends Subsystem {
 	DigitalInput topElevator;
 	DigitalInput bottomElevator;
 	DigitalInput nnewl;
+	
 	double antiGrav = .05;
 	public Elevator(int el1, int el2, int lmB, int lmT) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
 	    	Elevator2 = new WPI_TalonSRX(el2);
 	   	topElevator = new DigitalInput(0);
 	   	bottomElevator = new DigitalInput(1);
+	   	Elevator1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+	   	Elevator2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
+	   	Elevator1.getSelectedSensorPosition(0);
 	    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -47,7 +53,7 @@ public class Elevator extends Subsystem {
     	        	Elevator2.set(-coStick.getY());
     			}
     		}else if(!bottomElevator.get()) {
-    			if(-coStick.getY() < 0) {
+    			if(-coStick.getY() < 0 && Robot.pneumatics.getCarriageBool()) {
     				Elevator1.set(antiGrav);
     				Elevator2.set(antiGrav);
     			}else {
