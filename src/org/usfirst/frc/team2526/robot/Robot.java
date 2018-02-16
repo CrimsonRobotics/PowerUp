@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2526.robot.subsystems.Intake;
+import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
@@ -32,7 +33,8 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator(RobotMap.ELEVATOR_RIGHT,RobotMap.ELEVATOR_LEFT,RobotMap.LIMIT_ELEVATOR_B,RobotMap.LIMIT_ELEVATOR_T);
 	
 	
-	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
+	public static final DriveTrain drivetrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT,4);	
+	public static final Pneumatics pneumatics = new Pneumatics(2,3,0,1,4,5);
 	/*
 	DigitalInput input; 
 	DigitalInput input1;

@@ -19,7 +19,7 @@ public class Elevator extends Subsystem {
 	DigitalInput topElevator;
 	DigitalInput bottomElevator;
 	DigitalInput nnewl;
-	double antiGrav = .2;
+	double antiGrav = .05;
 	public Elevator(int el1, int el2, int lmB, int lmT) {
 	    	Elevator1 = new WPI_TalonSRX(el1);
 	    	Elevator2 = new WPI_TalonSRX(el2);

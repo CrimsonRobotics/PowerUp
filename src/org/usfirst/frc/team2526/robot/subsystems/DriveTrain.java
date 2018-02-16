@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,8 +32,7 @@ public class DriveTrain extends Subsystem {
 	SpeedControllerGroup right;
 	
 	
-	
-		public DriveTrain(int bLID, int bRID, int fLID, int fRID){
+		public DriveTrain(int bLID, int bRID, int fLID, int fRID, int channel){
 			
 			frontleft = new WPI_TalonSRX(fLID);
 			backleft = new WPI_TalonSRX(bLID);
@@ -65,6 +65,7 @@ public class DriveTrain extends Subsystem {
     	setDefaultCommand(new TeleopDrive());
     }
     
+
     public void teleopDriveInit(){
    
     	/*frontleft.setInverted(true);
