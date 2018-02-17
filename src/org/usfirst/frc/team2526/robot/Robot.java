@@ -7,12 +7,18 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2526.robot.commands.DriveForward;
 import org.usfirst.frc.team2526.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2526.robot.commands.MotionProfileDriver;
+import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -23,11 +29,13 @@ import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
-	public static OI m_oi;
-
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_FRONTLEFT, RobotMap.DRIVETRAIN_BACKLEFT, RobotMap.DRIVETRAIN_FRONTRIGHT, RobotMap.DRIVETRAIN_BACKRIGHT);
+	public static OI oi;
 	Command m_autonomousCommand;
+	Command m_driveCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -36,10 +44,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
+		oi = new OI();
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		//m_chooser.addObject("My Auto);
 		SmartDashboard.putData("Auto mode", m_chooser);
+		m_driveCommand = new DriveForward();
+		gyro.reset();
+		gyro.calibrate();
+
+			m_autonomousCommand = new MotionProfileDriver("/home/PathFinderFiles/trajectory-left.csv","/home/PathFinderFiles/trajectory-right.csv","/home/PathFinderFiles/trajectory-main.csv",12.0);
 	}
 
 	/**
@@ -70,8 +83,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
+		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -81,7 +93,11 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
+		//	Robot.gyro.calibrate();
+			Robot.driveTrain.pidInit();
 			m_autonomousCommand.start();
+			//m_driveCommand.start();
+			
 		}
 	}
 
