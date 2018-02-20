@@ -13,7 +13,7 @@ public class TeleopDrive extends Command {
     public TeleopDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.driveTrain);
     }
   
 
@@ -23,7 +23,7 @@ public class TeleopDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    Robot.drivetrain.teleopCraneDrive(Robot.m_oi.getDriverLeft(), Robot.m_oi.getDriverRight());
+    Robot.driveTrain.teleopCraneDrive(Robot.m_oi.getDriverLeft(), Robot.m_oi.getDriverRight());
     }
 
     // Make this return true when this Command no longer needs to run execute()
