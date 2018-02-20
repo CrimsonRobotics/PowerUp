@@ -51,7 +51,7 @@ public class MotionProfileDriver extends Command {
 	static float deviation2 = 0;// The standard deviation for this iteration of iterations
 	
 	static float bestValue = 9999;// Ex. a steadiness of oscillation of 4.1
-	static double bestValueAmount = .0;// Ex. f = 1.25
+	static double bestValueAmount = .01;// Ex. f = 1.25
 	
 	public MotionProfileDriver(String pathLeft, String pathRight, String pathCenter, double wheelInches){
 		requires(Robot.driveTrain);
@@ -62,7 +62,10 @@ public class MotionProfileDriver extends Command {
 		trajectoryRight = Pathfinder.readFromCSV(curveFileRight);
 		trajectoryCenter = Pathfinder.readFromCSV(curveFileCenter);
 		this.wheelInches = wheelInches;
-		SmartDashboard.putString("What to tune?", "None");
+		SmartDashboard.putString("What to tune?(f,p,i,d)", "None");
+		SmartDashboard.putNumber("Amount of Oscillation",0);
+		SmartDashboard.putNumber("Steadiness of Oscillation",0);
+		SmartDashboard.putString("Recomendation","Run Robot");
 	}
 	public MotionProfileDriver(Trajectory trajectoryLeft, Trajectory trajectoryCenter, Trajectory trajectorRight, Trajectory trajectoryRight){
 		this.trajectoryLeft = trajectoryLeft;
