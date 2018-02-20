@@ -52,6 +52,10 @@ public class Intake extends Subsystem {
 		talon1.set(.8);
 		talon2.set(1);
 	}
+	public void intakeStack() {
+		talon1.set(-.4);
+		talon2.set(.4);
+	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());

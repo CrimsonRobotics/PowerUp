@@ -18,6 +18,7 @@ import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
 import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.GearStop;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
+import org.usfirst.frc.team2526.robot.commands.IntakeStack;
 import org.usfirst.frc.team2526.robot.commands.ShiftDrive;
 import org.usfirst.frc.team2526.robot.commands.ShiftElevator;
 import org.usfirst.frc.team2526.robot.commands.ShootCubeAdjust;
@@ -38,7 +39,7 @@ public class OI {
 	private Joystick coDriver = new Joystick(2);
 	private JoystickButton shiftDrive = new JoystickButton(driverLeft,3);
 	private JoystickButton gearIn = new JoystickButton(coDriver,1);
-	private JoystickButton dropCarriage = new JoystickButton(coDriver,2);
+	private JoystickButton cubeStack = new JoystickButton(coDriver,2);
 	private JoystickButton intakeControl = new JoystickButton(coDriver,3);
 	private JoystickButton gearOut = new JoystickButton(coDriver,4);
 	private JoystickButton adjustCubeLeft = new JoystickButton(coDriver,5);
@@ -46,6 +47,8 @@ public class OI {
 	private JoystickButton elevatorShift = new JoystickButton(coDriver,7);
 	private JoystickButton elevatorClose = new JoystickButton(coDriver,8);
 	//private JoystickButton moveElevatorTop = new JoystickButton(coDriver,12);
+	private JoystickButton dropCarriage = new JoystickButton(coDriver,12);
+	
 	//private JoystickButton stopElevator = new JoystickButton(coDriver,7);
 	//private JoystickPOV elevatorUp = new JoystickButton(coDriver,6);
 	//private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
@@ -63,6 +66,7 @@ public class OI {
 		elevatorShift.whenPressed(new ShiftElevator());
 		elevatorClose.whenPressed(new CarriageClose());
 		intakeControl.whenPressed(new UpIntake());
+		cubeStack.whileHeld(new IntakeStack());
 		}
 	//	moveElevatorTop.whenPressed(new ElevatorButton());
 	//	stopElevator.whenPressed(new StopElevator());

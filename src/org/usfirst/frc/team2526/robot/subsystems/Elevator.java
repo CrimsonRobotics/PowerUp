@@ -30,7 +30,6 @@ public class Elevator extends Subsystem {
 	   	bottomElevator = new DigitalInput(1);
 	   	Elevator1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 	   	Elevator2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
-	   	Elevator1.getSelectedSensorPosition(0);
 	    }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -41,8 +40,13 @@ public class Elevator extends Subsystem {
     // here. Call these from Commands.
     public void moveElevator(Joystick coStick) {
     	if(topElevator.get() && bottomElevator.get()) {
+    		if(Elevator1.getSelectedSensorPosition(0) > 0) {
+    			Elevator1.set(-coStick.getY());
+            	Elevator2.set(-coStick.getY());
+    		}else {
     		Elevator1.set(-coStick.getY());
         	Elevator2.set(-coStick.getY());
+    		}
     	}else{
     		if(!topElevator.get()) {
     			if(-coStick.getY() > 0) {
