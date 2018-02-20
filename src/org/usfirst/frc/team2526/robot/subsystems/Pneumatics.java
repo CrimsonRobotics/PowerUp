@@ -23,7 +23,6 @@ public class Pneumatics extends Subsystem {
 	public boolean liftIntake;
 	public boolean elevatorButton;
 	public boolean shiftElevator;
-	public boolean shiftDrive;
 	public boolean dropCarriage;
 	public boolean carriageLimit = true;
 	
@@ -71,12 +70,10 @@ public class Pneumatics extends Subsystem {
     
     //DriveTrain Pneumatics
     public void driveShiftUp() {
-    	shiftDrive = false;
-    	driveShift.set(false);
+    	driveShift.set(true);
     }
     public void driveShiftDown() {
-    	shiftDrive = true;
-    	driveShift.set(true);
+    	driveShift.set(false);
     }
     
     //Carriage Pneumatics
