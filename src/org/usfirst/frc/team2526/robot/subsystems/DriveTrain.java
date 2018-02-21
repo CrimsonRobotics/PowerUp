@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX bL; //Back Left Motor
 	private WPI_TalonSRX fR; //Front Right Motor
 	private WPI_TalonSRX bR; //Back Right Motor
-	public Double fPID = 0.0;
+	public Double fPID = 1.0;
 	public Double pPid = 0.0;
 	public Double iPid = 0.0;
 	public Double dPid = 0.0;

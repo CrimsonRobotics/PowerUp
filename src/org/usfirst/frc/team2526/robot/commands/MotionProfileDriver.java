@@ -24,7 +24,7 @@ public class MotionProfileDriver extends Command {
 	private double wheelInches;
 	private String whatToTune;
 	
-	static int countDown = 700;// Iterations until monitoring starts
+	static int countDown = 1000;// Iterations until monitoring starts
 	
 	static int variable = 100;// The value to be analyzed
 
@@ -62,10 +62,14 @@ public class MotionProfileDriver extends Command {
 		trajectoryRight = Pathfinder.readFromCSV(curveFileRight);
 		trajectoryCenter = Pathfinder.readFromCSV(curveFileCenter);
 		this.wheelInches = wheelInches;
-		SmartDashboard.putString("What to tune?(f,p,i,d)", "None");
 		SmartDashboard.putNumber("Amount of Oscillation",0);
 		SmartDashboard.putNumber("Steadiness of Oscillation",0);
 		SmartDashboard.putString("Recomendation","Run Robot");
+		SmartDashboard.putString("What to tune?(f,p,i,d)", "None");
+		SmartDashboard.putNumber("fPID", Robot.driveTrain.fPID);
+		SmartDashboard.putNumber("pPID", Robot.driveTrain.pPid);
+		SmartDashboard.putNumber("iPID", Robot.driveTrain.iPid);
+		SmartDashboard.putNumber("dPID", Robot.driveTrain.dPid);
 	}
 	public MotionProfileDriver(Trajectory trajectoryLeft, Trajectory trajectoryCenter, Trajectory trajectorRight, Trajectory trajectoryRight){
 		this.trajectoryLeft = trajectoryLeft;
@@ -75,6 +79,7 @@ public class MotionProfileDriver extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize(){
+		countDown = 1000;
 		iterator = 0;
 		finished = false;
 		Robot.gyro.reset();
@@ -82,7 +87,6 @@ public class MotionProfileDriver extends Command {
 		SmartDashboard.putBoolean("Finished", finished);
 		SmartDashboard.putNumber("Iterator", iterator);
 
-		whatToTune = SmartDashboard.getString("What to tune?", "None");
 		
 		array = new int[checkTime];
 		arrayTwo = new float[checkTimeTwo];
@@ -96,6 +100,11 @@ public class MotionProfileDriver extends Command {
 		SmartDashboard.putNumber("Better i",-1);
 		SmartDashboard.putNumber("Better d",-1);
 		SmartDashboard.putString("Recomendation","Start Measuring");
+		SmartDashboard.putString("What To Tune","None?");
+		SmartDashboard.getNumber("fPID", Robot.driveTrain.fPID);
+		SmartDashboard.getNumber("pPID", Robot.driveTrain.pPid);
+		SmartDashboard.getNumber("iPID", Robot.driveTrain.iPid);
+		SmartDashboard.getNumber("dPID", Robot.driveTrain.dPid);
 		
 		
 	}
@@ -106,8 +115,11 @@ public class MotionProfileDriver extends Command {
 	}
 	@Override
 	protected void execute() {
-		Robot.driveTrain.speedDrive(25, 25);
+		Robot.driveTrain.speedDrive(100, 100);
 		SmartDashboard.putNumber("Best Value",bestValue);
+		//whatToTune = "f";
+		whatToTune = SmartDashboard.getString("What to tune?(f,p,i,d)", "None");
+		SmartDashboard.putString("What Will Tune",whatToTune);
 		switch(whatToTune){
 			case"f": SmartDashboard.putNumber("Better f",bestValueAmount);
 				break;
@@ -125,8 +137,9 @@ public class MotionProfileDriver extends Command {
 		SmartDashboard.putNumber("dPID", Robot.driveTrain.dPid);
 		//Timer.delay(2);
 		//Robot.driveTrain.fPID = 
+		SmartDashboard.putNumber("Speed",Robot.driveTrain.getSpeed());
 		if (countDown <= 0){
-			SmartDashboard.putNumber("Speed",Robot.driveTrain.getSpeed());
+			
 			
 			variable = Robot.driveTrain.getSpeed();// Update variable
 			
@@ -176,22 +189,26 @@ public class MotionProfileDriver extends Command {
 						switch(whatToTune){
 							case"f": 
 								Robot.driveTrain.fPID += .005;
+								SmartDashboard.putNumber("Better f",bestValueAmount);
 								SmartDashboard.putString("Recomendation","Raising f");
 								break;
 							case"p": 
 								Robot.driveTrain.pPid += .005;
+								SmartDashboard.putNumber("Better p",bestValueAmount);
 								SmartDashboard.putString("Recomendation","Raising p");
 								break;
 							case"i": 
 								Robot.driveTrain.iPid += .005;
+								SmartDashboard.putNumber("Better i",bestValueAmount);
 								SmartDashboard.putString("Recomendation","Raising i");
 								break;
 							case"d": 
 								Robot.driveTrain.dPid += .005;
+								SmartDashboard.putNumber("Better d",bestValueAmount);
 								SmartDashboard.putString("Recomendation","Raising d");
 								break;
 						}
-					}else if (deviation2>bestValue*1.2){
+					}else if (deviation2>bestValue*1.05){
 						switch(whatToTune){
 							case"f": 
 								Robot.driveTrain.fPID -= .005;
