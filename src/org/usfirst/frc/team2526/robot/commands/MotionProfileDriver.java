@@ -52,8 +52,6 @@ public class MotionProfileDriver extends Command {
 		finished = false;
 		Robot.gyro.reset();
 		Robot.gyro.calibrate();
-		
-		
 	}
 	@Override
 	protected boolean isFinished(){
@@ -73,8 +71,8 @@ public class MotionProfileDriver extends Command {
 			SmartDashboard.putNumber("Heading", headingDegrees);
 			double headingError = headingDegrees - angle;
 			
-			//double headingCorrection = headingError* CORRECTION_FACTOR;
-			double headingCorrection = 0;
+			double headingCorrection = headingError* CORRECTION_FACTOR;
+			//double headingCorrection = 0;
 			SmartDashboard.putNumber("Heading Correction", headingCorrection);
 			//double leftSpeed = trajectoryLeft.segments[iterator].velocity + headingCorrection;
 			//double rightSpeed = trajectoryRight.segments[iterator].velocity - headingCorrection;
