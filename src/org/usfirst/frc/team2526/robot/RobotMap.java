@@ -17,9 +17,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class RobotMap {
 	
-	public static final int DRIVETRAIN_FRONTLEFT = 2;
-	public static final int DRIVETRAIN_FRONTRIGHT = 7;
-	public static final int DRIVETRAIN_BACKLEFT = 1;
+	public static final int DRIVETRAIN_FRONTLEFT = 1;
+	public static final int DRIVETRAIN_FRONTRIGHT = 2;
+	public static final int DRIVETRAIN_BACKLEFT = 7;
 	public static final int DRIVETRAIN_BACKRIGHT = 8;
 	public static final int ELEVATOR_RIGHT = 6;
 	public static final int ELEVATOR_LEFT = 3;

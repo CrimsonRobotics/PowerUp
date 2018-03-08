@@ -47,11 +47,12 @@ public class DriveTrain extends Subsystem {
 		//fR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		leftDrive = new SpeedControllerGroup(fL, bL);
 	    rightDrive = new SpeedControllerGroup(fR, bR);
+	    
 	    bL.follow(fL);//fL leads bL follows
 		bR.follow(fR);//fR leads bR follows
 	//setFollowerOf(fR, bR);
 		drive = new DifferentialDrive(this.leftDrive, this.rightDrive);
-		pidInit();
+		//pidInit();
 	}
 	public int getSpeed() {
 		//System.out.println(fL.getSelectedSensorVelocity(0));
@@ -80,14 +81,15 @@ public class DriveTrain extends Subsystem {
 		
 		//fL.setFeedbacxkDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		bL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		bR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
 		//fR.setFeedbacxkDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	//	fR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
 		//fL.reverseSensor(false);
-		fL.setSensorPhase(false);
+		fL.setSensorPhase(true);
 		//fR.reverseSensor(true);
-		fR.setSensorPhase(true);
+		fR.setSensorPhase(false);
 		
 		//disable safety
 		fL.setSafetyEnabled(false);
@@ -97,7 +99,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void pidSpeedInit(){
-		fL.set(ControlMode.Velocity, 0);
+		/*fL.set(ControlMode.Velocity, 0);
 		fR.set(ControlMode.Velocity, 0);
 		adjustRampRate(0);
 		bL.setInverted(false);
@@ -105,7 +107,7 @@ public class DriveTrain extends Subsystem {
 		bR.setInverted(false);
 		fL.setInverted(false);
 		fR.setInverted(false);
-		fL.setInverted(true);
+		fL.setInverted(true);*/
 	}
 	
 	private void adjustRampRate(double rate){
@@ -116,7 +118,12 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void teleopCraneDrive(Joystick left, Joystick right){
-			drive.arcadeDrive(left.getY(), right.getX(), true);
+		/*bL.setInverted(true);
+		bR.setInverted(true);
+		fL.setInverted(true);
+		fR.setInverted(true);*/
+			drive.arcadeDrive(-left.getY(), -right.getX(), true);
+			//drive.tankDrive(left.getY(), right.getY());
 	}
 	
 	public void speedDrive(double speedRight,double speedLeft){
