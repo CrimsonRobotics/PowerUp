@@ -67,6 +67,7 @@ public class OI {
 		elevatorClose.whenPressed(new CarriageClose());
 		intakeControl.whenPressed(new UpIntake());
 		cubeStack.whileHeld(new IntakeStack());
+		cubeStack.whenReleased(new GearStop());
 		}
 	//	moveElevatorTop.whenPressed(new ElevatorButton());
 	//	stopElevator.whenPressed(new StopElevator());
