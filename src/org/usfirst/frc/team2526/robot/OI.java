@@ -22,6 +22,36 @@ public class OI {
 	private Joystick driverLeft = new Joystick(0);
 	private Joystick driverRight = new Joystick(1);
 	private Joystick coDriver = new Joystick(2);
+	private JoystickButton shiftDrive = new JoystickButton(driverLeft,3);
+	private JoystickButton gearIn = new JoystickButton(coDriver,1);
+	private JoystickButton cubeStack = new JoystickButton(coDriver,2);
+	private JoystickButton intakeControl = new JoystickButton(coDriver,3);
+	private JoystickButton gearOut = new JoystickButton(coDriver,4);
+	private JoystickButton adjustCubeLeft = new JoystickButton(coDriver,5);
+	private JoystickButton adjustCubeRight = new JoystickButton(coDriver,6);
+	private JoystickButton elevatorShift = new JoystickButton(coDriver,7);
+	private JoystickButton elevatorClose = new JoystickButton(coDriver,8);
+	//private JoystickButton moveElevatorTop = new JoystickButton(coDriver,12);
+	private JoystickButton dropCarriage = new JoystickButton(coDriver,12);
+	
+	//private JoystickButton stopElevator = new JoystickButton(coDriver,7);
+	//private JoystickPOV elevatorUp = new JoystickButton(coDriver,6);
+	//private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
+	public OI() {
+		shiftDrive.whileHeld(new ShiftDrive());
+		gearIn.whileHeld(new GearIn());
+		gearIn.whenReleased(new GearStop());
+		gearOut.whileHeld(new IntakeOut());
+		gearOut.whenReleased(new GearStop());
+		adjustCubeLeft.whileHeld(new AdjustCubeLeft());
+		adjustCubeLeft.whenReleased(new GearStop());
+		adjustCubeRight.whileHeld(new AdjustCubeRight());
+		adjustCubeRight.whenReleased(new GearStop());
+		dropCarriage.whenPressed(new DropCarriage());
+		elevatorShift.whenPressed(new ShiftElevator());
+		elevatorClose.whenPressed(new CarriageClose());
+		intakeControl.whenPressed(new UpIntake());
+		cubeStack.whileHeld(new IntakeStack());
 	public OI(){
 		//highGear.whileHeld(new Shift());
 		}

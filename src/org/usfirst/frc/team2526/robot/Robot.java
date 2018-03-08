@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team2526.robot.subsystems.Intake;
+import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team2526.robot.commands.DriveForward;
 import org.usfirst.frc.team2526.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2526.robot.commands.MotionProfileDriver;
@@ -28,7 +30,20 @@ import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+	
+	public static final Elevator elevator = new Elevator(RobotMap.ELEVATOR_RIGHT,RobotMap.ELEVATOR_LEFT,RobotMap.LIMIT_ELEVATOR_B,RobotMap.LIMIT_ELEVATOR_T);
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT,4);	
+	public static final Pneumatics pneumatics = new Pneumatics(2,3,0,1,4,5);
+	SerialPort serial = new SerialPort(9600, SerialPort.Port.kMXP,8);
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
+	/*
+	DigitalInput input; 
+	DigitalInput input1;
+	DigitalInput input2;*/
+	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
+	
+	public static OI m_oi;
+		Command m_autonomousCommand;
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_FRONTLEFT, RobotMap.DRIVETRAIN_BACKLEFT, RobotMap.DRIVETRAIN_FRONTRIGHT, RobotMap.DRIVETRAIN_BACKRIGHT);
 	public static OI oi;
@@ -81,6 +96,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_autonomousCommand = m_chooser.getSelected();
+
 		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
