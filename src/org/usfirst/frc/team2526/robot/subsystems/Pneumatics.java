@@ -70,10 +70,10 @@ public class Pneumatics extends Subsystem {
     
     //DriveTrain Pneumatics
     public void driveShiftUp() {
-    	driveShift.set(true);
+    	driveShift.set(false);
     }
     public void driveShiftDown() {
-    	driveShift.set(false);
+    	driveShift.set(true);
     }
     
     //Carriage Pneumatics
