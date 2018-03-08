@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveTrain extends Subsystem {
-	private WPI_TalonSRX fL; //Front Left Motor 
+	public WPI_TalonSRX fL; //Front Left Motor 
 	private WPI_TalonSRX bL; //Back Left Motor
-	private WPI_TalonSRX fR; //Front Right Motor
+	public WPI_TalonSRX fR; //Front Right Motor
 	private WPI_TalonSRX bR; //Back Right Motor
 	public Double fPID = 1.0;
 	public Double pPid = 0.0;

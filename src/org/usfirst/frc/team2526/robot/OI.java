@@ -7,11 +7,27 @@
 
 package org.usfirst.frc.team2526.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 
+import org.usfirst.frc.team2526.robot.commands.AdjustCubeLeft;
+import org.usfirst.frc.team2526.robot.commands.AdjustCubeRight;
+import org.usfirst.frc.team2526.robot.commands.CarriageClose;
+import org.usfirst.frc.team2526.robot.commands.DropCarriage;
+import org.usfirst.frc.team2526.robot.commands.ElevatorButton;
+import org.usfirst.frc.team2526.robot.commands.ElevatorControl;
+import org.usfirst.frc.team2526.robot.commands.GearIn;
+import org.usfirst.frc.team2526.robot.commands.GearStop;
+import org.usfirst.frc.team2526.robot.commands.IntakeOut;
+import org.usfirst.frc.team2526.robot.commands.IntakeStack;
+import org.usfirst.frc.team2526.robot.commands.ShiftDrive;
+import org.usfirst.frc.team2526.robot.commands.ShiftElevator;
+import org.usfirst.frc.team2526.robot.commands.ShootCubeAdjust;
+import org.usfirst.frc.team2526.robot.commands.StopElevator;
+import org.usfirst.frc.team2526.robot.commands.UpIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,21 +35,60 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 
 public class OI {
-	private Joystick driverLeft = new Joystick(0);
 	private Joystick driverRight = new Joystick(1);
+	private Joystick driverLeft = new Joystick(0);
 	private Joystick coDriver = new Joystick(2);
-	public OI(){
-		//highGear.whileHeld(new Shift());
+	private JoystickButton shiftDrive = new JoystickButton(driverLeft,3);
+	private JoystickButton gearIn = new JoystickButton(coDriver,1);
+	private JoystickButton cubeStack = new JoystickButton(coDriver,2);
+	private JoystickButton intakeControl = new JoystickButton(coDriver,3);
+	private JoystickButton gearOut = new JoystickButton(coDriver,4);
+	private JoystickButton adjustCubeLeft = new JoystickButton(coDriver,5);
+	private JoystickButton adjustCubeRight = new JoystickButton(coDriver,6);
+	private JoystickButton elevatorShift = new JoystickButton(coDriver,7);
+	private JoystickButton elevatorClose = new JoystickButton(coDriver,8);
+	//private JoystickButton moveElevatorTop = new JoystickButton(coDriver,12);
+	private JoystickButton dropCarriage = new JoystickButton(coDriver,12);
+	
+	//private JoystickButton stopElevator = new JoystickButton(coDriver,7);
+	//private JoystickPOV elevatorUp = new JoystickButton(coDriver,6);
+	//private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
+	public OI() {
+		shiftDrive.whileHeld(new ShiftDrive());
+		gearIn.whileHeld(new GearIn());
+		gearIn.whenReleased(new GearStop());
+		gearOut.whileHeld(new IntakeOut());
+		gearOut.whenReleased(new GearStop());
+		adjustCubeLeft.whileHeld(new AdjustCubeLeft());
+		adjustCubeLeft.whenReleased(new GearStop());
+		adjustCubeRight.whileHeld(new AdjustCubeRight());
+		adjustCubeRight.whenReleased(new GearStop());
+		dropCarriage.whenPressed(new DropCarriage());
+		elevatorShift.whenPressed(new ShiftElevator());
+		elevatorClose.whenPressed(new CarriageClose());
+		intakeControl.whenPressed(new UpIntake());
+		cubeStack.whileHeld(new IntakeStack());
+		cubeStack.whenReleased(new GearStop());
 		}
-	public Joystick getDriverLeft(){
-		return driverLeft;
-	}
-	public Joystick getDriverRight(){
-		return driverRight;
-	}
+	//	moveElevatorTop.whenPressed(new ElevatorButton());
+	//	stopElevator.whenPressed(new StopElevator());
+		//adjustCube2.whenPressed(new ShootCubeAdjust());
+	
+	
 	public Joystick getCoDriver(){
 		return coDriver;
 	}
+	public Joystick getDriverRight() {
+		return driverRight;
+	}
+	public Joystick getDriverLeft() {
+		return driverLeft;
+	}
+
+
+	
+	
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -61,4 +116,7 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	
+	
 }

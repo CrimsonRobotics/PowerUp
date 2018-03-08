@@ -8,17 +8,22 @@
 package org.usfirst.frc.team2526.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team2526.robot.commands.DriveForward;
-import org.usfirst.frc.team2526.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2526.robot.commands.MotionProfileDriver;
+import org.usfirst.frc.team2526.robot.subsystems.Intake;
+import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team2526.robot.commands.DriveStraight;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,12 +33,20 @@ import org.usfirst.frc.team2526.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+	
+	public static final Elevator elevator = new Elevator(RobotMap.ELEVATOR_RIGHT,RobotMap.ELEVATOR_LEFT,RobotMap.LIMIT_ELEVATOR_T,RobotMap.LIMIT_ELEVATOR_B);
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
+	public static final Pneumatics pneumatics = new Pneumatics(2,3,0,1,4,5);
+	SerialPort serial = new SerialPort(9600, SerialPort.Port.kMXP,8);
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
-	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
-	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_FRONTLEFT, RobotMap.DRIVETRAIN_BACKLEFT, RobotMap.DRIVETRAIN_FRONTRIGHT, RobotMap.DRIVETRAIN_BACKRIGHT);
-	public static OI oi;
-	Command m_autonomousCommand;
-	Command m_driveCommand;
+	/*
+	DigitalInput input; 
+	DigitalInput input1;
+	DigitalInput input2;*/
+	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
+	
+	public static OI m_oi;
+		Command m_autonomousCommand = new DriveStraight();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -42,15 +55,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		//m_chooser.addObject("My Auto);
-		SmartDashboard.putData("Auto mode", m_chooser);
-		m_driveCommand = new DriveForward();
-		gyro.reset();
-		gyro.calibrate();
+		m_oi = new OI();
+		serial.writeString("Purple");	
+		/*input = new DigitalInput(0);data
+		input1 = new DigitalInput(1);
+		input2 = new DigitalInput(2);*/
 
-			m_autonomousCommand = new MotionProfileDriver("/home/PathFinderFiles/trajectory-left.csv","/home/PathFinderFiles/trajectory-right.csv","/home/PathFinderFiles/trajectory-main.csv",12.0);
+		// chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putData("Auto mode", m_chooser);
+		CameraServer.getInstance().startAutomaticCapture("GearCamera", "/dev/video0").setResolution(768, 432);
 	}
 
 	/**
@@ -81,7 +94,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -94,8 +107,7 @@ public class Robot extends TimedRobot {
 		//	Robot.gyro.calibrate();
 			Robot.driveTrain.pidInit();
 			m_autonomousCommand.start();
-			//m_driveCommand.start();
-			
+		
 		}
 	}
 
@@ -109,21 +121,31 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
 	}
+
 
 	/**
 	 * This function is called periodically during operator control.
 	 */
 	@Override
 	public void teleopPeriodic() {
+		/*SmartDashboard.putBoolean("Hoo", !input.get());
+		 SmartDashboard.putBoolean("Haa", !input1.get());
+		 SmartDashboard.putBoolean("Hee", !input2.get());*/
 		Scheduler.getInstance().run();
+		
+		
 	}
 
 	/**
