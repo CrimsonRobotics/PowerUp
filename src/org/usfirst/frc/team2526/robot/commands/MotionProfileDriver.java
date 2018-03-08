@@ -58,7 +58,17 @@ public class MotionProfileDriver extends Command {
 		// TODO Auto-generated method stub
 		return finished;
 	}
-	
+
+	/*@Override
+	protected void execute() {
+		double angle = Math.IEEEremainder(Robot.gyro.getAngle(), 360);
+		double headingDegrees = 0;
+		SmartDashboard.putNumber("Heading", headingDegrees);
+		double headingError = headingDegrees - angle;
+		
+		double headingCorrection = headingError* CORRECTION_FACTOR;
+		Robot.driveTrain.speedDrive(100+headingCorrection, 100+headingCorrection);
+	}*/
 	@Override
 	protected void execute() {
 		//double angle = (Robot.gyro.getAngle()%360.0);	

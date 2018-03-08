@@ -28,8 +28,8 @@ public class Elevator extends Subsystem {
 	public Elevator(int el1, int el2, int lmB, int lmT) {
     	Elevator1 = new WPI_TalonSRX(el1);
     	Elevator2 = new WPI_TalonSRX(el2);
-	   	topElevator = new DigitalInput(0);
-	   	bottomElevator = new DigitalInput(1);
+	   	topElevator = new DigitalInput(1);
+	   	bottomElevator = new DigitalInput(0);
 	   	Elevator1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 	   	Elevator2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0,0);
 	   	Elevator1.setSensorPhase(true);

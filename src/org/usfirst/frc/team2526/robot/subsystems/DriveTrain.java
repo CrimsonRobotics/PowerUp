@@ -24,20 +24,24 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	//
-	WPI_TalonSRX frontLeft;
-	WPI_TalonSRX frontRight;
+	public WPI_TalonSRX frontLeft;
+	public WPI_TalonSRX frontRight;
 	WPI_TalonSRX backLeft;
 	WPI_TalonSRX backRight;
 	DifferentialDrive drive;
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
+
+	public Double fPID = 100.0;
+	public Double pPid = 0.0;
+	public Double iPid = 0.0;
+	public Double dPid = 0.0;
 	
-	
-		public DriveTrain(int bLID, int bRID, int fLID, int fRID, int channel){
+		public DriveTrain(int bLID, int bRID, int frontLeftID, int frontRightID, int channel){
 			
-			frontLeft = new WPI_TalonSRX(fLID);
+			frontLeft = new WPI_TalonSRX(frontLeftID);
 			backLeft = new WPI_TalonSRX(bLID);
-			frontRight = new WPI_TalonSRX(fRID);
+			frontRight = new WPI_TalonSRX(frontRightID);
 			backRight = new WPI_TalonSRX(bRID);
 			left = new SpeedControllerGroup(frontLeft, backLeft);
 			right = new SpeedControllerGroup(frontRight, backRight);
@@ -82,7 +86,44 @@ public class DriveTrain extends Subsystem {
     	*/
     }
     
-  
+    public void pidInit(){
+		fPID = SmartDashboard.getNumber("fPID", 0);
+		pPid = SmartDashboard.getNumber("pPID", 0);
+		iPid = SmartDashboard.getNumber("iPID", 0);
+		dPid = SmartDashboard.getNumber("dPID", 0);
+		//set pid for Left Side
+		//frontLeft.setPID(gainsLeft.p, gainsLeft.i, gainsLeft.d, gainsLeft.f, gainsLeft.iZone, gainsLeft.rampRate, gainsLeft.profile);
+		frontLeft.config_kF(0,fPID,0); 
+		frontLeft.config_kP(0,pPid,0);
+		frontLeft.config_kI(0,iPid,0);
+		frontLeft.config_kD(0,dPid,0);
+		frontLeft.selectProfileSlot(0,0);
+	
+		//Set pid for Right Side
+		//frontRight.setPID(gainsRight.p, gainsRight.i, gainsRight.d, gainsRight.f, gainsRight.iZone, gainsRight.rampRate, gainsRight.profile);
+		frontRight.config_kF(0,fPID,0); 
+		frontRight.config_kP(0,pPid,0);
+		frontRight.config_kI(0,0,0);
+		frontRight.config_kD(0,dPid,0);
+		frontRight.selectProfileSlot(0,0);
+		
+		//frontLeft.setFeedbacxkDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		
+		//frontRight.setFeedbacxkDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	//	frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		
+		//frontLeft.reverseSensor(false);
+		frontLeft.setSensorPhase(false);
+		//frontRight.reverseSensor(true);
+		frontRight.setSensorPhase(true);
+		
+		//disable safety
+		frontLeft.setSafetyEnabled(false);
+		frontRight.setSafetyEnabled(false);
+		backLeft.setSafetyEnabled(false);
+		backRight.setSafetyEnabled(false);
+	}
 	
 	
     public void teleopCraneDrive(Joystick left, Joystick right){

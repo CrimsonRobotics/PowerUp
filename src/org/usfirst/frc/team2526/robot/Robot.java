@@ -10,6 +10,7 @@ package org.usfirst.frc.team2526.robot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -20,6 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2526.robot.subsystems.Intake;
 import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team2526.robot.commands.MotionProfileDriver;
+import org.usfirst.frc.team2526.robot.commands.TurnLeft;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
@@ -44,7 +47,8 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 	
 	public static OI m_oi;
-		Command m_autonomousCommand;
+		//Command m_autonomousCommand = new MotionProfileDriver("/home/PathFinderFiles/trajectory-left.csv","/home/PathFinderFiles/trajectory-right.csv","/home/PathFinderFiles/trajectory-main.csv",6.0);
+	Command m_autonomousCommand = new TurnLeft();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -92,7 +96,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
