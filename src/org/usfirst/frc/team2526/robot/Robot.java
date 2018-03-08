@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2526.robot.subsystems.Intake;
 import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team2526.robot.commands.DriveStraight;
+import org.usfirst.frc.team2526.robot.commands.TurnLeft;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
@@ -46,7 +47,7 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 	
 	public static OI m_oi;
-		Command m_autonomousCommand = new DriveStraight();
+		Command m_autonomousCommand = new TurnLeft();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
