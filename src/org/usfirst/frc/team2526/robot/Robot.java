@@ -35,7 +35,7 @@ import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 public class Robot extends TimedRobot {
 	
 	public static final Elevator elevator = new Elevator(RobotMap.ELEVATOR_RIGHT,RobotMap.ELEVATOR_LEFT,RobotMap.LIMIT_ELEVATOR_T,RobotMap.LIMIT_ELEVATOR_B);
-	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT,4);	
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.DRIVETRAIN_BACKLEFT,RobotMap.DRIVETRAIN_BACKRIGHT,RobotMap.DRIVETRAIN_FRONTLEFT,RobotMap.DRIVETRAIN_FRONTRIGHT);	
 	public static final Pneumatics pneumatics = new Pneumatics(2,3,0,1,4,5);
 	SerialPort serial = new SerialPort(9600, SerialPort.Port.kMXP,8);
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);

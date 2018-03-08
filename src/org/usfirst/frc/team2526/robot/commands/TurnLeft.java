@@ -25,21 +25,21 @@ public class TurnLeft extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {	
     	leftTarget = 500+Robot.driveTrain.fL.getSensorCollection().getQuadraturePosition();
-    	rightTarget = 500+Robot.driveTrain.frontRight.getSensorCollection().getQuadraturePosition();
+    	rightTarget = 500+Robot.driveTrain.fR.getSensorCollection().getQuadraturePosition();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.frontLeft.set(ControlMode.Position,-leftTarget);
-    	Robot.driveTrain.frontRight.set(ControlMode.Position,rightTarget);
-    	SmartDashboard.putNumber("Encoder Left", Robot.driveTrain.frontLeft.getSensorCollection().getQuadraturePosition());
-    	SmartDashboard.putNumber("Encoder Right", Robot.driveTrain.frontRight.getSensorCollection().getQuadraturePosition());
+    	Robot.driveTrain.fL.set(ControlMode.Position,-leftTarget);
+    	Robot.driveTrain.fR.set(ControlMode.Position,rightTarget);
+    	SmartDashboard.putNumber("Encoder Left", Robot.driveTrain.fL.getSensorCollection().getQuadraturePosition());
+    	SmartDashboard.putNumber("Encoder Right", Robot.driveTrain.fR.getSensorCollection().getQuadraturePosition());
     	SmartDashboard.putNumber("Encoder Right Target", rightTarget);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Math.abs(Robot.driveTrain.frontRight.getSensorCollection().getQuadraturePosition()-rightTarget) < 200){
+    	if (Math.abs(Robot.driveTrain.fR.getSensorCollection().getQuadraturePosition()-rightTarget) < 200){
     		return true;
     	}
         return false;
