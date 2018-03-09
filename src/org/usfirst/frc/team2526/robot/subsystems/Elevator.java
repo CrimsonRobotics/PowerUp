@@ -55,8 +55,8 @@ public class Elevator extends Subsystem {
     	
     }
     public void moveTop(){
-    	Elevator1.set(.4);
-    	Elevator2.set(.4);
+    	Elevator1.set(1);
+    	Elevator2.set(1);
     }
     public void moveElevator(Joystick coStick) {
     	SmartDashboard.putNumber("Elevator1 Encoder Value", Elevator1.getSelectedSensorPosition(0));
@@ -105,7 +105,7 @@ public class Elevator extends Subsystem {
 	   if(!topElevator.get()) {
 		  Elevator1.set(antiGrav);
 		  Elevator2.set(antiGrav);
-	   }else {	
+	   }else {
 		Elevator1.set(1);
        	Elevator2.set(1);
 	   }
