@@ -35,8 +35,8 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 
 public class OI {
-	private Joystick driverRight = new Joystick(1);
-	private Joystick driverLeft = new Joystick(0);
+	private Joystick driverRight = new Joystick(0);
+	private Joystick driverLeft = new Joystick(1);
 	private Joystick coDriver = new Joystick(2);
 	private JoystickButton shiftDrive = new JoystickButton(driverLeft,3);
 	private JoystickButton gearIn = new JoystickButton(coDriver,1);

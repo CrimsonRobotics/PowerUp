@@ -24,7 +24,9 @@ import org.usfirst.frc.team2526.robot.commands.MotionProfileDriver;
 import org.usfirst.frc.team2526.robot.subsystems.Intake;
 import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team2526.robot.commands.DriveStraight;
-import org.usfirst.frc.team2526.robot.commands.TurnLeft;
+import org.usfirst.frc.team2526.robot.commands.GoForward;
+import org.usfirst.frc.team2526.robot.commands.AutoDrive;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoScale;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
@@ -49,7 +51,8 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 	
 	public static OI m_oi;
-		Command m_autonomousCommand = new TurnLeft();
+		//Command m_autonomousCommand = new GoForward(3.5);
+		Command m_autonomousCommand = new AutoScale();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -59,11 +62,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		serial.writeString("Purple");	
 		/*input = new DigitalInput(0);data
 		input1 = new DigitalInput(1);
 		input2 = new DigitalInput(2);*/
-
+		serial.writeString("<STANDBY>");
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		CameraServer.getInstance().startAutomaticCapture("GearCamera", "/dev/video0").setResolution(768, 432);
@@ -97,7 +99,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		serial.writeString("<ASTART>");
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -107,7 +109,7 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
-		//	Robot.gyro.calibrate();
+			Robot.gyro.calibrate();
 			Robot.driveTrain.pidInit();
 			m_autonomousCommand.start();
 		
@@ -124,7 +126,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		
+		serial.writeString("<TSTART>");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
