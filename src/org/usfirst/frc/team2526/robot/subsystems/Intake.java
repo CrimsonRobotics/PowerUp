@@ -45,12 +45,12 @@ public class Intake extends Subsystem {
 		talon2.set(-1);
 	}
 	public void adjustCubeRight() {
-		talon1.set(-1);
-		talon2.set(-.8);
+		talon1.set(-.9);
+		talon2.set(-.7);
 	}
 	public void adjustCubeLeft() {
-		talon1.set(.8);
-		talon2.set(1);
+		talon1.set(.7);
+		talon2.set(.9);
 	}
 	public void intakeStack() {
 		talon1.set(-.4);

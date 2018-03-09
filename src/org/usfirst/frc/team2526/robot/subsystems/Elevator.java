@@ -24,7 +24,7 @@ public class Elevator extends Subsystem {
 	
 	double elevatorTopPosition = 3000;
 	double slowDownArea = 600;
-	double antiGrav = .02;
+	double antiGrav = .05;
 	public Elevator(int el1, int el2, int lmB, int lmT) {
     	Elevator1 = new WPI_TalonSRX(el1);
     	Elevator2 = new WPI_TalonSRX(el2);
@@ -54,7 +54,10 @@ public class Elevator extends Subsystem {
     	
     	
     }
-    
+    public void moveTop(){
+    	Elevator1.set(.4);
+    	Elevator2.set(.4);
+    }
     public void moveElevator(Joystick coStick) {
     	SmartDashboard.putNumber("Elevator1 Encoder Value", Elevator1.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Elevator2 Encoder Value", Elevator2.getSelectedSensorPosition(0));
@@ -100,16 +103,16 @@ public class Elevator extends Subsystem {
 	   }
    public void moveTopElevator() {
 	   if(!topElevator.get()) {
-		  Elevator1.set(0);
-		  Elevator2.set(0);
+		  Elevator1.set(antiGrav);
+		  Elevator2.set(antiGrav);
 	   }else {	
 		Elevator1.set(1);
        	Elevator2.set(1);
 	   }
    }
    public void stopElevator() {
-	   Elevator1.set(0);
-	   Elevator2.set(0);
+	   Elevator1.set(antiGrav);
+	   Elevator2.set(antiGrav);
    }
 }
     	
