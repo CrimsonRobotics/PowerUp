@@ -7,6 +7,7 @@ import org.usfirst.frc.team2526.robot.commands.DownIntake;
 import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.MoveToTop;
 import org.usfirst.frc.team2526.robot.commands.Shoot;
+import org.usfirst.frc.team2526.robot.commands.TimerCommand;
 import org.usfirst.frc.team2526.robot.commands.UpIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -17,11 +18,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoTest extends CommandGroup {
 
     public AutoTest() {
-    	
     	setInterruptible(false);
-    	
 
-    	addSequential(new AutoDrive(10000,10000,100,1));
+    	addSequential(new UpIntake());
+    	addSequential(new TimerCommand(3));
+    	addSequential(new Shoot(3));
+    	
+    	
+    	//addSequential(new AutoDrive(10000,10000,100,1));
     	
     	// Add Commands here:
         // e.g. addSequential(new Command1());

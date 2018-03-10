@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
 		serial.writeString("<STANDBY>");
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		CameraServer.getInstance().startAutomaticCapture("GearCamera", "/dev/video0").setResolution(768, 432);
+		CameraServer.getInstance().startAutomaticCapture("GearCamera", "/dev/video0").setResolution(480, 360);
 	}
 
 	/**
@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
+		
 			//Robot.gyro.calibrate();
 			Robot.driveTrain.pidInit();
 			/*if (gameData.length()>0){

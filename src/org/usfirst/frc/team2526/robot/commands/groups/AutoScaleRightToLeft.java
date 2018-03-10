@@ -22,13 +22,13 @@ public class AutoScaleRightToLeft extends CommandGroup {
     	
     	addSequential(new UpIntake());
     	addSequential(new UpIntake());
-    	addSequential(new AutoDrive(12500,12500,200,1));
-    	addSequential(new AutoDrive(1100,-1100,100,.5));
+    	addSequential(new AutoDrive(12500,12500,200,1,false));
+    	addSequential(new AutoDrive(1100,-1100,100,.5,false));
     	addParallel(new MoveToTop());
     	addParallel(new MoveToTop());
-    	addSequential(new AutoDrive(10500,10500,200,1));
-    	addSequential(new AutoDrive(-1100,1100,100,.5));
-    	addSequential(new AutoDrive(1500,1500,100,1));
+    	addSequential(new AutoDrive(10500,10500,200,1,false));
+    	addSequential(new AutoDrive(-1100,1100,100,.5,false));
+    	addSequential(new AutoDrive(1500,1500,100,1,false));
     	addSequential(new Shoot(3));
     	
     	

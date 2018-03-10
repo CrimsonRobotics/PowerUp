@@ -15,7 +15,6 @@ import org.usfirst.frc.team2526.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class Shoot extends Command {
-	private Boolean isDone = false;
 	public Shoot(double time) {
 		super(time);
 		// Use requires() here to declare subsystem dependencies

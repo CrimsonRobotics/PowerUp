@@ -6,6 +6,8 @@ import org.usfirst.frc.team2526.robot.commands.AutoDrive;
 import org.usfirst.frc.team2526.robot.commands.DownIntake;
 import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.MoveToTop;
+import org.usfirst.frc.team2526.robot.commands.ShiftDown;
+import org.usfirst.frc.team2526.robot.commands.ShiftDrive;
 import org.usfirst.frc.team2526.robot.commands.Shoot;
 import org.usfirst.frc.team2526.robot.commands.UpIntake;
 
@@ -21,13 +23,13 @@ public class AutoScaleRight extends CommandGroup {
     	setInterruptible(false);
     	addSequential(new UpIntake());
     	addSequential(new UpIntake());
-    	addParallel(new MoveToTop());
-    	addParallel(new MoveToTop());
-    	addSequential(new AutoDrive(14530,14530,200,.85));
-    	//addSequential(new MoveToTop());
-    	//addSequential(new MoveToTop());
-    	addSequential(new AutoDrive(750,-750,100,.4));
-    	addSequential(new AutoDrive(500,500,100,.4));
+    	addParallel(new ShiftDrive());
+    	addSequential(new AutoDrive(14030,14030,100,1,true));
+    	addParallel(new ShiftDown());
+    	addSequential(new MoveToTop());
+    	addSequential(new MoveToTop());	
+    	addSequential(new AutoDrive(750,-750,100,.4,false));
+    	addSequential(new AutoDrive(500,500,100,.4,false));
     	addSequential(new Shoot(3));
     	
     	// Add Commands here:

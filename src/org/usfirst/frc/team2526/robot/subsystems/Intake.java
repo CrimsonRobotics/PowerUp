@@ -36,6 +36,10 @@ public class Intake extends Subsystem {
 		talon1.set(-1);
 		talon2.set(1);
 	}
+	public void intakeOutSlow() {
+		talon1.set(-.7);
+		talon2.set(.7);
+	}
 	public void intakeAdjustOut() {
 		talon1.set(.9);
 		talon2.set(.9);

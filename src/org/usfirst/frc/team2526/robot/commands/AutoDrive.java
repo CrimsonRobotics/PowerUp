@@ -30,11 +30,12 @@ public class AutoDrive extends Command {
 	//int range;
 	double range;
 	double targetAngle;
+	boolean willSlow;
 	
 	WPI_TalonSRX encoderTalonLeft = Robot.driveTrain.bL;
 	WPI_TalonSRX encoderTalonRight = Robot.driveTrain.fR;
 	
-    public AutoDrive(int leftChange,int rightChange,int accuracy, double power) {
+    public AutoDrive(int leftChange,int rightChange,int accuracy, double power, boolean willSlow) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
@@ -44,11 +45,12 @@ public class AutoDrive extends Command {
     	this.power = power;
     	leftPower = power;
     	rightPower = power;
+    	this.willSlow = willSlow;
     }
   
 
     // Called just before this Command runs the first time
-    protected void initialize() {	
+    protected void initialize() {
     	leftTarget = leftChange+encoderTalonLeft.getSensorCollection().getQuadraturePosition();
     	rightTarget = rightChange+encoderTalonRight.getSensorCollection().getQuadraturePosition();
     	SmartDashboard.putString("Correcting Action", "None");
@@ -66,19 +68,20 @@ public class AutoDrive extends Command {
 
     	//SmartDashboard.putNumber("rightAccumulator", rightAccumulator);
     	SmartDashboard.putString("Slowing?", "false");
-
-    	/*SmartDashboard.putNumber(".5*leftChange", .5*leftChange);
-    	SmartDashboard.putNumber(".5*rightChange", .5*rightChange);
-    	if (Math.abs(leftDistance) < Math.abs(.15*leftChange) && Math.abs(rightDistance) < Math.abs(.15*rightChange)){
-    		leftPower*=.5;
-    		rightPower*=.5;
-        	SmartDashboard.putString("Slowing?", "true");
-    	}else if (Math.abs(leftDistance) < Math.abs(.33*leftChange) && Math.abs(rightDistance) < Math.abs(.33*rightChange)){
-    		leftPower*=.8;
-    		rightPower*=.8;
-        	SmartDashboard.putString("Slowing?", "true");
-    	}*/
     	
+    	if (willSlow){
+	    	SmartDashboard.putNumber(".5*leftChange", .5*leftChange);
+	    	SmartDashboard.putNumber(".5*rightChange", .5*rightChange);
+	    	if (Math.abs(leftDistance) < Math.abs(.20*leftChange) && Math.abs(rightDistance) < Math.abs(.15*rightChange)){
+	    		leftPower*=.5;
+	    		rightPower*=.5;
+	        	SmartDashboard.putString("Slowing?", "true");
+	    	}else if (Math.abs(leftDistance) < Math.abs(.40*leftChange) && Math.abs(rightDistance) < Math.abs(.33*rightChange)){
+	    		leftPower*=.8;
+	    		rightPower*=.8;
+	        	SmartDashboard.putString("Slowing?", "true");
+	    	}
+    	}
     	
     	
     	

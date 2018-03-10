@@ -6,6 +6,7 @@ import org.usfirst.frc.team2526.robot.commands.AutoDrive;
 import org.usfirst.frc.team2526.robot.commands.DownIntake;
 import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.MoveToTop;
+import org.usfirst.frc.team2526.robot.commands.ShiftDown;
 import org.usfirst.frc.team2526.robot.commands.Shoot;
 import org.usfirst.frc.team2526.robot.commands.ShootSlow;
 import org.usfirst.frc.team2526.robot.commands.UpIntake;
@@ -20,13 +21,13 @@ public class AutoSwitchLeft extends CommandGroup {
     public AutoSwitchLeft() {
     	
     	setInterruptible(false);
+    	addSequential(new ShiftDown());
     	addSequential(new UpIntake());
     	addSequential(new UpIntake());
-    	addSequential(new AutoDrive(2800,2800,100,.6));
-        addSequential(new AutoDrive(1100,-1100,100,.4));
-    	addSequential(new AutoDrive(2700,2700,100,.6));
-    	addSequential(new AutoDrive(-1100,1100,100,.4));
-    	//addSequential(new AutoDrive(1100,1100,100,.4));
+    	addSequential(new AutoDrive(2800,2800,100,.85,false));
+        addSequential(new AutoDrive(1100,-1100,100,.5,false));
+    	addSequential(new AutoDrive(4000,4000,100,.85,false));
+    	addSequential(new AutoDrive(-1100,1100,100,.5,false));
     	addParallel(new MoveToTop());
     	addParallel(new MoveToTop());
     	addSequential(new GoForward(2.5));
