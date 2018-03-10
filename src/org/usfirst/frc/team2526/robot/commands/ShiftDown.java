@@ -14,8 +14,8 @@ import org.usfirst.frc.team2526.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ShiftDrive extends Command {
-	public ShiftDrive() {
+public class ShiftDown extends Command {
+	public ShiftDown() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.pneumatics);
 	}
@@ -27,7 +27,7 @@ public class ShiftDrive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.pneumatics.driveShiftUp();
+		Robot.pneumatics.driveShiftDown();
 	}
 	// Make this return true when this Command no longer needs to run execute()
 	@Override

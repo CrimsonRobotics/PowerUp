@@ -14,37 +14,41 @@ import org.usfirst.frc.team2526.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ShiftDrive extends Command {
-	public ShiftDrive() {
+public class ShootSlow extends Command {
+	private Boolean isDone = false;
+	public ShootSlow(double time) {
+		super(time);
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.pneumatics);
+		requires(Robot.intake);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 	}
+
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.pneumatics.driveShiftUp();
+		Robot.intake.intakeStack();
 	}
+
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return true;
+		return isTimedOut();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		
+		Robot.intake.intakeStop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-
+		Robot.intake.intakeStop();
 	}
 }

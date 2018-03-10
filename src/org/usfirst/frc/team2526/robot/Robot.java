@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -26,7 +27,13 @@ import org.usfirst.frc.team2526.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team2526.robot.commands.DriveStraight;
 import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.AutoDrive;
-import org.usfirst.frc.team2526.robot.commands.groups.AutoScale;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoScaleLeft;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoScaleRight;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoSwitchFromLeft;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoSwitchFromRight;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoSwitchLeft;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoSwitchRight;
+import org.usfirst.frc.team2526.robot.commands.groups.AutoTest;
 import org.usfirst.frc.team2526.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2526.robot.subsystems.Elevator;
 
@@ -44,6 +51,8 @@ public class Robot extends TimedRobot {
 	public static final Pneumatics pneumatics = new Pneumatics(2,3,0,1,4,5);
 	SerialPort serial = new SerialPort(9600, SerialPort.Port.kMXP,8);
 	public static final ADXRS450_Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
+	
+
 	/*
 	DigitalInput input; 
 	DigitalInput input1;
@@ -51,8 +60,9 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 	
 	public static OI m_oi;
-		//Command m_autonomousCommand = new GoForward(3.5);
-		Command m_autonomousCommand = new AutoScale();
+		Command m_autonomousCommand = new GoForward(7);
+		//Command m_autonomousCommand = new AutoSwitchFromMid();
+		//Command m_autonomousCommand = new AutoScaleLeft();
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
@@ -61,8 +71,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+	
 		m_oi = new OI();
-		/*input = new DigitalInput(0);data
+		//Robot.pneumatics.driveShiftUp();
+ 		/*input = new DigitalInput(0);data
 		input1 = new DigitalInput(1);
 		input2 = new DigitalInput(2);*/
 		serial.writeString("<STANDBY>");
@@ -99,6 +111,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		String gameData="";
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		serial.writeString("<ASTART>");
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -111,6 +125,77 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			//Robot.gyro.calibrate();
 			Robot.driveTrain.pidInit();
+			/*if (gameData.length()>0){
+				
+				if (gameData.charAt(1) == 'L'){
+					m_autonomousCommand = new AutoScale();
+				}
+			}*/
+			
+			/*switch(gameData.charAt(1)){
+			case 'L': m_autonomousCommand = new AutoSwitchFromMid();;
+				break;
+			case 'R': m_autonomousCommand = new AutoSwitchFromMid();;
+				break;
+			}*/
+			
+			String position = "middle";//left right middle
+			String priority = "switch";//switch or scale
+			
+			if (gameData.length()>0){
+				if (position == "left"){
+					if (priority == "scale"){
+						if(gameData.charAt(1) == 'L'){
+				    		m_autonomousCommand = new AutoScaleLeft();
+				    	}else if(gameData.charAt(1) == 'R'){
+							if(gameData.charAt(0) == 'L'){
+					    		m_autonomousCommand = new AutoSwitchFromLeft();
+					    	}else if(gameData.charAt(0) == 'R'){
+								m_autonomousCommand = new GoForward(7);
+					    	}
+				    	}
+					}else{// when priority is switch
+						if(gameData.charAt(0) == 'L'){
+				    		m_autonomousCommand = new AutoSwitchFromLeft();
+				    	}else if(gameData.charAt(0) == 'R'){
+				    		if(gameData.charAt(1) == 'L'){
+					    		m_autonomousCommand = new AutoScaleLeft();
+					    	}else if(gameData.charAt(1) == 'R'){
+								m_autonomousCommand = new GoForward(7);
+					    	}
+				    	}
+					}
+				}else if (position == "right"){
+					if (priority == "scale"){
+						if(gameData.charAt(1) == 'L'){
+							if(gameData.charAt(0) == 'L'){
+								m_autonomousCommand = new GoForward(7);
+							}else if(gameData.charAt(0) == 'R'){
+								m_autonomousCommand = new AutoSwitchFromRight();
+					    	}
+				    	}else if(gameData.charAt(1) == 'R'){
+							m_autonomousCommand = new AutoScaleLeft();
+				    	}
+					}else{// when priority is switch
+						if(gameData.charAt(0) == 'L'){
+							if(gameData.charAt(1) == 'L'){
+								m_autonomousCommand = new GoForward(7);
+					    	}else if(gameData.charAt(1) == 'R'){
+								m_autonomousCommand = new AutoScaleLeft();
+					    	}
+						}else if(gameData.charAt(0) == 'R'){
+							m_autonomousCommand = new AutoSwitchFromRight();
+				    	}
+					}
+				}else if (position == "middle"){
+					if(gameData.charAt(0) == 'L'){
+			    		m_autonomousCommand = new AutoSwitchLeft();
+			    	}else if(gameData.charAt(0) == 'R'){
+						m_autonomousCommand = new AutoSwitchRight();
+			    	}
+				}
+			}
+			//m_autonomousCommand = new AutoTest();
 			m_autonomousCommand.start();
 		
 		}

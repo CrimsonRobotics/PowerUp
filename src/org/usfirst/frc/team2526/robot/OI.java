@@ -19,6 +19,7 @@ import org.usfirst.frc.team2526.robot.commands.GearIn;
 import org.usfirst.frc.team2526.robot.commands.GearStop;
 import org.usfirst.frc.team2526.robot.commands.IntakeOut;
 import org.usfirst.frc.team2526.robot.commands.IntakeStack;
+import org.usfirst.frc.team2526.robot.commands.ShiftDown;
 import org.usfirst.frc.team2526.robot.commands.ShiftDrive;
 import org.usfirst.frc.team2526.robot.commands.ShiftElevator;
 import org.usfirst.frc.team2526.robot.commands.ShootCubeAdjust;
@@ -55,6 +56,7 @@ public class OI {
 	//private JoystickButton adjustCube2 = new JoystickButton(coDriver,5);
 	public OI() {
 		shiftDrive.whileHeld(new ShiftDrive());
+		shiftDrive.whenReleased(new ShiftDown());
 		gearIn.whileHeld(new GearIn());
 		gearIn.whenReleased(new GearStop());
 		gearOut.whileHeld(new IntakeOut());

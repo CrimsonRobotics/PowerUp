@@ -1,10 +1,13 @@
 package org.usfirst.frc.team2526.robot.commands.groups;
 
 
+import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.commands.AutoDrive;
 import org.usfirst.frc.team2526.robot.commands.DownIntake;
+import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.MoveToTop;
 import org.usfirst.frc.team2526.robot.commands.Shoot;
+import org.usfirst.frc.team2526.robot.commands.ShootSlow;
 import org.usfirst.frc.team2526.robot.commands.UpIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -12,19 +15,24 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoScale extends CommandGroup {
+public class AutoSwitchLeft extends CommandGroup {
 
-    public AutoScale() {
+    public AutoSwitchLeft() {
     	
     	setInterruptible(false);
-    	//addSequential(new DownIntake(2));
     	addSequential(new UpIntake());
     	addSequential(new UpIntake());
-    	addSequential(new AutoDrive(15800,15800,100,.7));
-    	addSequential(new MoveToTop());
+    	addSequential(new AutoDrive(2800,2800,100,.6));
+        addSequential(new AutoDrive(1100,-1100,100,.4));
+    	addSequential(new AutoDrive(2700,2700,100,.6));
     	addSequential(new AutoDrive(-1100,1100,100,.4));
-    	addSequential(new Shoot(3));
-        // Add Commands here:
+    	//addSequential(new AutoDrive(1100,1100,100,.4));
+    	addParallel(new MoveToTop());
+    	addParallel(new MoveToTop());
+    	addSequential(new GoForward(2.5));
+    	addSequential(new ShootSlow(3));
+        
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

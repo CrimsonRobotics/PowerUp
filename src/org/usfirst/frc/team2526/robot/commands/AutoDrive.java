@@ -64,12 +64,20 @@ public class AutoDrive extends Command {
     	rightDistance = encoderTalonRight.getSensorCollection().getQuadraturePosition()-rightTarget;
     	leftDistance = encoderTalonLeft.getSensorCollection().getQuadraturePosition()-leftTarget;
 
+    	//SmartDashboard.putNumber("rightAccumulator", rightAccumulator);
     	SmartDashboard.putString("Slowing?", "false");
-    	if (leftDistance < .5*leftChange && rightDistance < .5*rightChange){
+
+    	/*SmartDashboard.putNumber(".5*leftChange", .5*leftChange);
+    	SmartDashboard.putNumber(".5*rightChange", .5*rightChange);
+    	if (Math.abs(leftDistance) < Math.abs(.15*leftChange) && Math.abs(rightDistance) < Math.abs(.15*rightChange)){
     		leftPower*=.5;
     		rightPower*=.5;
         	SmartDashboard.putString("Slowing?", "true");
-    	}
+    	}else if (Math.abs(leftDistance) < Math.abs(.33*leftChange) && Math.abs(rightDistance) < Math.abs(.33*rightChange)){
+    		leftPower*=.8;
+    		rightPower*=.8;
+        	SmartDashboard.putString("Slowing?", "true");
+    	}*/
     	
     	
     	
