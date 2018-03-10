@@ -28,7 +28,8 @@ public class AutoScaleRight extends CommandGroup {
     	addParallel(new ShiftDown());
     	addSequential(new MoveToTop());
     	addSequential(new MoveToTop());	
-    	addSequential(new AutoDrive(750,-750,100,.4,false));
+    	addSequential(new MoveToTop());
+    	addSequential(new AutoDrive(750,-750,100,.6,false));
     	addSequential(new AutoDrive(500,500,100,.4,false));
     	addSequential(new Shoot(3));
     	

@@ -126,22 +126,10 @@ public class Robot extends TimedRobot {
 		
 			//Robot.gyro.calibrate();
 			Robot.driveTrain.pidInit();
-			/*if (gameData.length()>0){
-				
-				if (gameData.charAt(1) == 'L'){
-					m_autonomousCommand = new AutoScale();
-				}
-			}*/
 			
-			/*switch(gameData.charAt(1)){
-			case 'L': m_autonomousCommand = new AutoSwitchFromMid();;
-				break;
-			case 'R': m_autonomousCommand = new AutoSwitchFromMid();;
-				break;
-			}*/
 			
-			String position = "middle";//left right middle
-			String priority = "switch";//switch or scale
+			String position = "right";//left right middle
+			String priority = "scale";//switch or scale
 			
 			if (gameData.length()>0){
 				if (position == "left"){
@@ -175,14 +163,14 @@ public class Robot extends TimedRobot {
 								m_autonomousCommand = new AutoSwitchFromRight();
 					    	}
 				    	}else if(gameData.charAt(1) == 'R'){
-							m_autonomousCommand = new AutoScaleLeft();
+							m_autonomousCommand = new AutoScaleRight();
 				    	}
 					}else{// when priority is switch
 						if(gameData.charAt(0) == 'L'){
 							if(gameData.charAt(1) == 'L'){
 								m_autonomousCommand = new GoForward(7);
 					    	}else if(gameData.charAt(1) == 'R'){
-								m_autonomousCommand = new AutoScaleLeft();
+								m_autonomousCommand = new AutoScaleRight();
 					    	}
 						}else if(gameData.charAt(0) == 'R'){
 							m_autonomousCommand = new AutoSwitchFromRight();

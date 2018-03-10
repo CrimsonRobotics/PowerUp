@@ -73,8 +73,8 @@ public class AutoDrive extends Command {
 	    	SmartDashboard.putNumber(".5*leftChange", .5*leftChange);
 	    	SmartDashboard.putNumber(".5*rightChange", .5*rightChange);
 	    	if (Math.abs(leftDistance) < Math.abs(.20*leftChange) && Math.abs(rightDistance) < Math.abs(.15*rightChange)){
-	    		leftPower*=.5;
-	    		rightPower*=.5;
+	    		leftPower*=.3;
+	    		rightPower*=.3;
 	        	SmartDashboard.putString("Slowing?", "true");
 	    	}else if (Math.abs(leftDistance) < Math.abs(.40*leftChange) && Math.abs(rightDistance) < Math.abs(.33*rightChange)){
 	    		leftPower*=.8;
