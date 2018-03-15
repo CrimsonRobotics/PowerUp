@@ -3,6 +3,7 @@ package org.usfirst.frc.team2526.robot.commands.groups;
 
 import org.usfirst.frc.team2526.robot.Robot;
 import org.usfirst.frc.team2526.robot.commands.AutoDrive;
+import org.usfirst.frc.team2526.robot.commands.AutoDriveCurve;
 import org.usfirst.frc.team2526.robot.commands.DownIntake;
 import org.usfirst.frc.team2526.robot.commands.GoForward;
 import org.usfirst.frc.team2526.robot.commands.MoveToTop;
@@ -20,9 +21,9 @@ public class AutoTest extends CommandGroup {
     public AutoTest() {
     	setInterruptible(false);
 
-    	addSequential(new UpIntake());
-    	addSequential(new TimerCommand(3));
-    	addSequential(new Shoot(3));
+    	addSequential(new AutoDrive(5000,5000,100,1,true));
+    	addSequential(new AutoDriveCurve(0,2200,100,1,true, 90,0));
+    	addSequential(new AutoDriveCurve(3000,5000,100,1,true, 90,.8));
     	
     	
     	//addSequential(new AutoDrive(10000,10000,100,1));

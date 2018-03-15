@@ -184,7 +184,7 @@ public class Robot extends TimedRobot {
 			    	}
 				}
 			}
-			//m_autonomousCommand = new AutoTest();
+			m_autonomousCommand = new AutoTest();
 			m_autonomousCommand.start();
 		
 		}
